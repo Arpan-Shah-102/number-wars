@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Number Wars</title>
+        <link rel="icon" href="./assets/images/icon.png">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1><span class="container"><span class="glow"></span><span>⚔️</span></span> Number Wars <span class="container"><span class="glow"></span><span>⚔️</span></span></h1>
+            <div>
+                <button class="tutorial">📚 Tutorial</button>
+                <button class="stats">📊 Statistics</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="right pannel side-pannel">
+                <div class="scores">
+                    <div class="score player">
+                        <h3>🟢 Player 🟢</h3>
+                        <p class="player-score score">0</p>
+                    </div>
+                    <div class="score computer">
+                        <h3>🔴 Opponent 🔴</h3>
+                        <p class="computer-score score">0</p>
+                    </div>
+                </div>
+                <div class="settings">
+                    <button class="new-game setting">🔄 New Game</button>
+                    <button class="options setting">⚙️ Options</button>
+                    <button class="store setting">🛒 Store</button>
+                    <button class="casino setting">🎰 Casino</button>
+                </div>
+            </section>
+
+            <section class="center pannel">
+                <div class="terminal">Click on a cell to play card!</div>
+                <div class="gameboard-section">
+                    <div class="gameboard-connections"></div>
+                    <div class="gameboard grid-5x5">
+                        <div class="map-cell occupied" data-index="0">O</div>
+                        <div class="map-cell red" data-index="1">O</div>
+                        <div class="map-cell green" data-index="2">O</div>
+                        <div class="map-cell empty" data-index="3">O</div>
+                        <div class="map-cell empty" data-index="4">O</div>
+                        <div class="map-cell empty" data-index="5">O</div>
+                        <div class="map-cell empty" data-index="6">O</div>
+                        <div class="map-cell empty" data-index="7">O</div>
+                        <div class="map-cell empty" data-index="8">O</div>
+                        <div class="map-cell empty" data-index="9">O</div>
+                        <div class="map-cell empty" data-index="10">O</div>
+                        <div class="map-cell empty" data-index="11">O</div>
+                        <div class="map-cell empty" data-index="12">O</div>
+                        <div class="map-cell empty" data-index="13">O</div>
+                        <div class="map-cell empty" data-index="14">O</div>
+                        <div class="map-cell empty" data-index="15">O</div>
+                        <div class="map-cell empty" data-index="16">O</div>
+                        <div class="map-cell empty" data-index="17">O</div>
+                        <div class="map-cell empty" data-index="18">O</div>
+                        <div class="map-cell empty" data-index="19">O</div>
+                        <div class="map-cell empty" data-index="20">O</div>
+                        <div class="map-cell empty" data-index="21">O</div>
+                        <div class="map-cell empty" data-index="22">O</div>
+                        <div class="map-cell empty" data-index="23">O</div>
+                        <div class="map-cell empty" data-index="24">O</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="left pannel side-pannel">
+                <div class="current-card">
+                    <h3>🎴 Current Card 🎴</h3>
+                    <div class="card-display">0</div>
+                </div>
+                <div class="multiplier-display">
+                    <h4>✖️ Credits Multiplier ✖️</h4>
+                    <div>
+                        <p class="main-multiplier"><span>1.00</span>x ▼</p> <!-- ▲ -->
+                        <div class="all-multipliers">
+                            <hr>
+                            <div class="multiplier base">
+                                <p>Base</p>
+                                <p><span>1.00x</span></p>
+                            </div>
+                            <hr>
+                            <div class="total-multiplier total">
+                                <p>Total</p>
+                                <p><span>1.00x</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="powerups">⚡ Power-ups</button>
+            </section>
+        </main>
+
+        <section class="display-pannel stats-display">
+            <div>
+                <h2>📊 Statistics 📊</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+
+        <secton class="display-pannel tutorial">
+            <div>
+                <h2>📚 Tutorial 📚</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </secton>
+
+        <section class="display-pannel options-display">
+            <div>
+                <h2>⚙️ Options ⚙️</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+
+        <section class="display-pannel store-display">
+            <div>
+                <h2>🛒 Store 🛒</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+
+        <section class="display-pannel casino-display">
+            <div>
+                <h2>🎰 Casino 🎰</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+
+        <section class="display-pannel powerups-display">
+            <div>
+                <h2>⚡ Power-ups ⚡</h2>
+                <p>Coming Soon...</p>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 Arpan Shah. All rights reserved.
+            <script>
+                const currentYear = new Date().getFullYear();
+                document.querySelector('footer').innerHTML = `&copy; ${currentYear} Arpan Shah. All rights reserved.`;
+            </script>
+        </footer>
+
+        <script src="./js/utils.js"></script>
+        <script src="./js/script.js"></script>
+    </body>
+</html>
