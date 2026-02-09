@@ -11,6 +11,12 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
+### The Foundations V0.75 - 2/8/2026
+1. Continued Creating HTML & CSS
+2. Continued Sleek & Vibrand UI
+3. Updated Side Pannels
+4. Updated Side Buttons and Menus
+
 ### The Foundations V0.4 - 2/7/2026
 1. Created solid HTML & CSS foundation
 2. Created multiple classes and displays for future content

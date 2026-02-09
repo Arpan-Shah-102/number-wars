@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./css/style.css">
     </head>
 
-    <body>
+    <body class="default">
         <header>
             <h1><span class="container"><span class="glow"></span><span>⚔️</span></span> Number Wars <span class="container"><span class="glow"></span><span>⚔️</span></span></h1>
             <div>
@@ -20,12 +20,12 @@
         <main>
             <section class="right pannel side-pannel">
                 <div class="scores">
-                    <div class="score player">
-                        <h3>🟢 Player 🟢</h3>
+                    <div class="score-div player">
+                        <h3>You 🟢</h3>
                         <p class="player-score score">0</p>
                     </div>
-                    <div class="score computer">
-                        <h3>🔴 Opponent 🔴</h3>
+                    <div class="score-div computer">
+                        <h3>Opponent 🔴</h3>
                         <p class="computer-score score">0</p>
                     </div>
                 </div>
@@ -42,10 +42,10 @@
                 <div class="gameboard-section">
                     <div class="gameboard-connections"></div>
                     <div class="gameboard grid-5x5">
-                        <div class="map-cell occupied" data-index="0">O</div>
-                        <div class="map-cell red" data-index="1">O</div>
-                        <div class="map-cell green" data-index="2">O</div>
-                        <div class="map-cell empty" data-index="3">O</div>
+                        <div class="map-cell occupied" data-index="0">4</div>
+                        <div class="map-cell red" data-index="1">5</div>
+                        <div class="map-cell green" data-index="2">0</div>
+                        <div class="map-cell connection" data-index="3">O</div>
                         <div class="map-cell empty" data-index="4">O</div>
                         <div class="map-cell empty" data-index="5">O</div>
                         <div class="map-cell empty" data-index="6">O</div>
@@ -74,7 +74,10 @@
             <section class="left pannel side-pannel">
                 <div class="current-card">
                     <h3>🎴 Current Card 🎴</h3>
-                    <div class="card-display">0</div>
+                    <div class="full-card">
+                        <div class="card-num">0</div>
+                        <div class="card-display"></div>
+                    </div>
                 </div>
                 <div class="multiplier-display">
                     <h4>✖️ Credits Multiplier ✖️</h4>
@@ -86,6 +89,14 @@
                                 <p>Base</p>
                                 <p><span>1.00x</span></p>
                             </div>
+                            <div class="multiplier negative">
+                                <p>Base</p>
+                                <p><span>1.00x</span></p>
+                            </div>
+                            <div class="multiplier positive">
+                                <p>Base</p>
+                                <p><span>1.00x</span></p>
+                            </div>
                             <hr>
                             <div class="total-multiplier total">
                                 <p>Total</p>
@@ -94,49 +105,127 @@
                         </div>
                     </div>
                 </div>
-                <button class="powerups">⚡ Power-ups</button>
+                <button class="powerups-toggle">⚡ Power-ups</button>
             </section>
         </main>
 
         <section class="display-pannel stats-display">
             <div>
                 <h2>📊 Statistics 📊</h2>
-                <p>Coming Soon...</p>
+                <hr>
+                <div class="stat-manager">
+                    <div class="basic-stats">
+                        <div class="wins stat">
+                            <p>Wins</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="losses stat">
+                            <p>Losses</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="ties stat">
+                            <p>Ties</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="win-rate stat">
+                            <p>Win Rate</p>
+                            <h3>0%</h3>
+                        </div>
+                    </div>
+                    <div class="high-scores">
+                        <h3>🏆 High Scores 🏆</h3>
+                        <div class="overall hs-stat">
+                            <p>Overall</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="gm-scores">
+                            <div class="gm-1 hs-stat">
+                                <p>Game Mode 1</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="gm-2 hs-stat">
+                                <p>Game Mode 2</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="gm-3 hs-stat">
+                                <p>Game Mode 3</p>
+                                <h3>0</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="options-btns">
+                    <button class="reset-data">Reset Data</button>
+                    <button class="close">❌ Close</button>
+                </div>
             </div>
         </section>
 
         <secton class="display-pannel tutorial">
             <div>
                 <h2>📚 Tutorial 📚</h2>
-                <p>Coming Soon...</p>
+                <hr>
+                <div>
+                    <h3>📖 Scoring Rules</h3>
+                    <ul>
+                        <li><b>Same Number Match:</b> Connect to the same number = 1 point (e.g., 8-8)</li>
+                        <li><b>Add to Ten:</b> Connect numbers that add to 10 = 2 points (e.g., 3-7, 4-6)</li>
+                        <li><b>Sequences:</b> Connect 3+ consecutive numbers = points (e.g., 2-3-4 = 3 points, 5-6-7-8-9 = 5 points)</li>
+                        <li><b>Loop Sequences:</b> Use 0s to connect 9 and 1 (e.g., 8-9-0-1 = 4 points)</li>
+                        <li><b>Paths Matter:</b> Cells must be connected by the gray lines to score!</li>
+                        <li><b>Claim Cells:</b> When you score, you claim those cells (green for you, red for AI)</li>
+                        <li><b>End Bonus:</b> Get +1 point for each cell you own when the game ends</li>
+                    </ul>
+                </div>
+                <button class="interactive-demo">▶️ Try Interactive Demo</button>
+                <hr>
+                <button class="close">❌ Close</button>
             </div>
         </secton>
 
         <section class="display-pannel options-display">
             <div>
                 <h2>⚙️ Options ⚙️</h2>
+                <hr>
                 <p>Coming Soon...</p>
+                <hr>
+                <button class="close">❌ Close</button>
             </div>
         </section>
 
         <section class="display-pannel store-display">
             <div>
                 <h2>🛒 Store 🛒</h2>
+                <hr>
                 <p>Coming Soon...</p>
+                <hr>
+                <button class="close">❌ Close</button>
             </div>
         </section>
 
         <section class="display-pannel casino-display">
             <div>
                 <h2>🎰 Casino 🎰</h2>
+                <hr>
                 <p>Coming Soon...</p>
+                <hr>
+                <button class="close">❌ Close</button>
             </div>
         </section>
 
         <section class="display-pannel powerups-display">
             <div>
                 <h2>⚡ Power-ups ⚡</h2>
-                <p>Coming Soon...</p>
+                <hr>
+                <button class="powerup skip-ai"><p>⏩ Skip AI Turn</p><p class="remaining">1</p></button>
+                <button class="powerup replace-card"><p>🔄 Replace Card</p><p class="remaining">3</p></button>
+                <button class="powerup view-next"><p>👁️ View Next Card</p><p class="remaining">1</p></button>
+                <button class="powerup disabled undo-move"><p>↩️ Undo Move</p><p class="remaining">1</p></button>
+                <button class="powerup disabled pick-card"><p>🃏 Pick Card</p><p class="remaining">0</p></button>
+                <button class="powerup disabled double-credits"><p>💰 Double Credits for Turn</p><p class="remaining">0</p></button>
+                <hr>
+                <button class="close">❌ Close</button>
             </div>
         </section>
 
