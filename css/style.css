@@ -15,9 +15,6 @@ body {
     padding: 20px;
     min-height: 100vh;
 
-    &.default {background: linear-gradient(135deg, royalblue, blueviolet);}
-    &.fire {background: linear-gradient(135deg, rgb(255, 195, 0), rgb(255, 0, 98));}
-    &.seafoam {background: conic-gradient(darkslategray, teal, lightseagreen, turquoise, paleturquoise, darkslategray);}
 }
 @media (min-height: 1000px) {
     body {
@@ -25,6 +22,18 @@ body {
     }
     
 }
+.default {background: linear-gradient(135deg, royalblue, blueviolet);}
+.dark {background: linear-gradient(135deg, rgb(0, 55, 71), rgb(0, 16, 41));}
+.light {background: linear-gradient(135deg, rgb(241, 252, 255), rgb(173, 224, 255));}
+.nature {background: linear-gradient(135deg, rgb(34, 139, 34), rgb(144, 238, 144));}
+.sunset {background: linear-gradient(135deg, rgb(255, 0, 191), rgb(255, 251, 0));}
+.ocean {background: linear-gradient(135deg, rgb(0, 105, 148), rgb(0, 191, 255));}
+.fire {background: linear-gradient(135deg, white, rgb(255, 195, 0), rgb(255, 0, 98));}
+.midnight {background: linear-gradient(135deg, #0f0c29 0%, #302b63 40%, rgb(86, 86, 202) 50%, #302b63 60%, #24243e 100%);}
+.royal {background: linear-gradient(135deg, rgb(75, 0, 130), crimson);}
+.lava {background: linear-gradient(135deg, salmon, rgb(195, 55, 100), rgb(29, 38, 113));}
+.cosmic {background: linear-gradient(135deg, #0f0c29 0%, #1a1a4e 30%, #4b134f 70%, #c94b4b 100%);}
+.seafoam {background: conic-gradient(darkslategray, teal, lightseagreen, turquoise, paleturquoise, darkslategray);}
 
 h1 {
     font-size: 2.5rem;
@@ -254,8 +263,102 @@ footer {
             }
         }
     }
-}
+    &.options-display > div > div {
+        & .setting-select {
+            margin-bottom: 20px;
+        }
+        & .dropdown {
+            display: flex;
+            flex-direction: column;
 
+            & select {
+                padding: 6px 12px;
+                border-radius: 8px;
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                background-color: rgba(255, 255, 255, 0.25);
+                margin: 10px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 1.1rem;
+
+                & option {
+                    color: black;
+                    padding: 10px;
+                    font-weight: bold;
+                    font-size: 1rem;
+
+                    &.locked {
+                        color: gray;
+                        font-style: italic;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+        & .label-list div {
+            display: flex;
+            flex-direction: column;
+            padding: 0 20px;
+
+            & label {
+                margin-bottom: 10px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 1.05rem;
+
+                & input {
+                    margin-right: 10px;
+                    transform: scale(1.2);
+                    opacity: 1;
+                }
+
+                &:has(> input.locked) {
+                    opacity: 0.75;
+                    cursor: not-allowed;
+                    font-weight: normal;
+                    font-style: italic;
+                }
+            }
+        }
+        & .btn-list div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0 20px;
+            justify-content: space-evenly;
+
+            & button {
+                flex: 1 1 120px;
+                
+                &.theme-select {
+                    font-size: 1.15rem;
+                    height: 60px;
+                }
+                &.icon-pack h4 {
+                    font-size: 1.15rem;
+                }
+                &.selected {
+                    border: 3px solid rgb(255, 255, 255);
+                    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.75);
+                }
+                &.locked {
+                    transform: none;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+        & label:has(> input.sfx-toggle) {
+            margin-left: 20px;
+            transform: scale(1.1);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    }
+}
+.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 button {
     padding: 10px 20px;
@@ -503,6 +606,10 @@ main {
                 box-shadow: inset 0px 0px 12px rgb(44, 160, 255);
                 background-color: rgba(44, 160, 255, 0.3);
                 transform: scale(1.1);
+
+                &.empty * {
+                    animation: spin-pulse 1s ease-in-out infinite;
+                }
             }
             &:active {
                 opacity: 0.8;
@@ -536,6 +643,18 @@ main {
                 border-color: goldenrod;
                 box-shadow: inset 0px 0px 12px gold;
             }
+            &.helper {
+                box-shadow: inset 0px 0px 12px gold;
+                border-color: gold;
+                background-color: rgba(0, 255, 255, 0.3);
+            }
+            &.helping:hover {
+                background-color: rgba(0, 255, 255, 0.3);
+                & > p {
+                    color: rgb(0, 255, 0);
+                    font-weight: bold;
+                }
+            }
         }
     }
 }
@@ -546,5 +665,16 @@ main {
     }
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@keyframes spin-pulse {
+    0% {
+        transform: rotate(0deg) scale(0);
+    }
+    50% {
+        transform: rotate(360deg) scale(3);
+    }
+    100% {
+        transform: rotate(720deg) scale(0.1);
     }
 }

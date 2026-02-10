@@ -42,31 +42,31 @@
                 <div class="gameboard-section">
                     <div class="gameboard-connections"></div>
                     <div class="gameboard grid-5x5">
-                        <div class="map-cell occupied" data-index="0">4</div>
-                        <div class="map-cell red" data-index="1">5</div>
-                        <div class="map-cell green" data-index="2">0</div>
-                        <div class="map-cell connection" data-index="3">O</div>
-                        <div class="map-cell empty" data-index="4">O</div>
-                        <div class="map-cell empty" data-index="5">O</div>
-                        <div class="map-cell empty" data-index="6">O</div>
-                        <div class="map-cell empty" data-index="7">O</div>
-                        <div class="map-cell empty" data-index="8">O</div>
-                        <div class="map-cell empty" data-index="9">O</div>
-                        <div class="map-cell empty" data-index="10">O</div>
-                        <div class="map-cell empty" data-index="11">O</div>
-                        <div class="map-cell empty" data-index="12">O</div>
-                        <div class="map-cell empty" data-index="13">O</div>
-                        <div class="map-cell empty" data-index="14">O</div>
-                        <div class="map-cell empty" data-index="15">O</div>
-                        <div class="map-cell empty" data-index="16">O</div>
-                        <div class="map-cell empty" data-index="17">O</div>
-                        <div class="map-cell empty" data-index="18">O</div>
-                        <div class="map-cell empty" data-index="19">O</div>
-                        <div class="map-cell empty" data-index="20">O</div>
-                        <div class="map-cell empty" data-index="21">O</div>
-                        <div class="map-cell empty" data-index="22">O</div>
-                        <div class="map-cell empty" data-index="23">O</div>
-                        <div class="map-cell empty" data-index="24">O</div>
+                        <div class="map-cell occupied" data-index="0"><p>4</p></div> <!-- Nuteral cell -->
+                        <div class="map-cell red" data-index="1"><p>5</p></div> <!-- AI-owned cell -->
+                        <div class="map-cell green" data-index="2"><p>0</p></div> <!-- Player-owned cell -->
+                        <div class="map-cell empty connection" data-index="3"><p>O</p></div> <!-- Connection cell that shows possible connections near hover point -->
+                        <div class="map-cell empty helper" data-index="4"><p>O</p></div> <!-- Helper cell that points out other matches -->
+                        <div class="map-cell empty helping" data-index="5"><p>8</p></div> <!-- Helper cell when you hover -->
+                        <div class="map-cell empty" data-index="6"><p>🔃</p></div>
+                        <div class="map-cell empty" data-index="7"><p>O</p></div>
+                        <div class="map-cell empty" data-index="8"><p>O</p></div>
+                        <div class="map-cell empty" data-index="9"><p>O</p></div>
+                        <div class="map-cell empty" data-index="10"><p>O</p></div>
+                        <div class="map-cell empty" data-index="11"><p>O</p></div>
+                        <div class="map-cell empty" data-index="12"><p>O</p></div>
+                        <div class="map-cell empty" data-index="13"><p>O</p></div>
+                        <div class="map-cell empty" data-index="14"><p>O</p></div>
+                        <div class="map-cell empty" data-index="15"><p>O</p></div>
+                        <div class="map-cell empty" data-index="16"><p>O</p></div>
+                        <div class="map-cell empty" data-index="17"><p>O</p></div>
+                        <div class="map-cell empty" data-index="18"><p>O</p></div>
+                        <div class="map-cell empty" data-index="19"><p>O</p></div>
+                        <div class="map-cell empty" data-index="20"><p>O</p></div>
+                        <div class="map-cell empty" data-index="21"><p>O</p></div>
+                        <div class="map-cell empty" data-index="22"><p>O</p></div>
+                        <div class="map-cell empty" data-index="23"><p>O</p></div>
+                        <div class="map-cell empty" data-index="24"><p>O</p></div>
                     </div>
                 </div>
             </section>
@@ -188,7 +188,98 @@
             <div>
                 <h2>⚙️ Options ⚙️</h2>
                 <hr>
-                <p>Coming Soon...</p>
+                <div>
+                    <div class="setting-select dropdown">
+                        <h3>🤖 AI Difficulty:</h3>
+                        <select class="ai-difficulty-select">
+                            <option disabled class="locked" value="0.2">🔒 Novice (0.5x)</option>
+                            <option disabled class="locked" value="0.3">🔒 Beginner (0.75x)</option>
+                            <option value="0.4" selected>Intermediate (1x)</option>
+                            <option value="0.5">Skilled (1.1x)</option>
+                            <option value="0.6">Advanced (1.2x)</option>
+                            <option disabled class="locked" value="0.7">🔒 Expert (1.3x)</option>
+                            <option disabled class="locked" value="0.8">🔒 Pro (1.4x)</option>
+                            <option disabled class="locked" value="0.9">🔒 Master (1.5x)</option>
+                        </select>
+                    </div>
+                    <div class="setting-select dropdown">
+                        <h3>🧩 Board Size:</h3>
+                        <select class="board-size-select">
+                            <option disabled class="locked" value="3">🔒 3x3 (Miniscule)</option>
+                            <option disabled class="locked" value="4">🔒 4x4 (Small)</option>
+                            <option value="5" selected>5x5 (Classic)</option>
+                            <option disabled class="locked" value="6">🔒 6x6 (Normal)</option>
+                            <option disabled class="locked" value="7">🔒 7x7 (Medium)</option>
+                            <option disabled class="locked" value="8">🔒 8x8 (Large)</option>
+                            <option disabled class="locked" value="9">🔒 9x9 (Huge)</option>
+                            <option disabled class="locked" value="10">🔒 10x10 (Colossal)</option>
+                        </select>
+                    </div>
+                    <div class="setting-select dropdown">
+                        <h3>🏆 Gamemode:</h3>
+                        <select class="gamemode-select">
+                            <option value="classic" selected>Classic (1x)</option>
+                            <option disabled class="locked" value="blitz">🔒 Blitz (2.5x)</option>
+                            <option disabled class="locked" value="sudden-death">🔒 Sudden Death (3.25x)</option>
+                            <option disabled class="locked" value="chain-reaction">🔒 Chain Reaction (0.75x)</option>
+                            <option disabled class="locked" value="reverse-rules">🔒 Reverse Rules (3.75x)</option>
+                            <option disabled class="locked" value="mirror-match">🔒 Mirror Match (1.4x)</option>
+                            <option disabled class="locked" value="subtraction">🔒 Subtraction (1.5x)</option>
+                            <option disabled class="locked" value="ludicrously-lucky">🔒 Ludicrously Lucky (2.5x)</option>
+                            <option disabled class="locked" value="fog-of-war">🔒 Fog of War (1.5x)</option>
+                            <option disabled class="locked" value="territorial">🔒 Territorial (1.6x)</option>
+                        </select>
+                    </div>
+                    <div class="setting-select label-list">
+                        <h3>🎛️ Modifiers</h3>
+                        <div>
+                            <label><input type="checkbox" class="modifier" value="helper-cells">Helper Cells - See how many points you could get on a move (0.5x)</label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="no-bonus-points">🔒 F2P Friendly - No bonus points after round ends (1.2x)</label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="ai-first">🔒 AI Uprising - AI makes the first move (1.05x)</label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="no-powerups">🔒 Superpowerless - No power-ups useable (1.2x)</label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="maintained-paths">🔒 Maintained Paths - All paths are connected (0.75x)</label>
+                        </div>
+                    </div>
+                    <div class="setting-select btn-list">
+                        <h3>🎨 Themes</h3>
+                        <div>
+                            <button class="default theme-select selected">Default</button>
+                            <button class="dark theme-select">Dark</button>
+                            <button class="light theme-select">Light</button>
+                            <button class="nature theme-select">Nature</button>
+                            <button class="sunset theme-select">Sunset</button>
+                            <button class="ocean theme-select">Ocean</button>
+                            <button disabled class="fire theme-select locked">🔒 Fire</button>
+                            <button disabled class="midnight theme-select locked">🔒 Midnight</button>
+                            <button disabled class="royal theme-select locked">🔒 Royal</button>
+                            <button disabled class="lava theme-select locked">🔒 Lava</button>
+                            <button disabled class="cosmic theme-select locked">🔒 Cosmic</button>
+                            <button disabled class="seafoam theme-select locked">🔒 Seafoam</button>
+                        </div>
+                    </div>
+                    <div class="setting-select btn-list">
+                        <h3>🎁 Icon Packs</h3>
+                        <div>
+                            <button disabled class="light default icon-pack selected">
+                                <h4>0-9</h4>
+                                <p>Default</p>
+                            </button>
+                            <button disabled class="light emoji icon-pack locked">
+                                <h4>1️⃣-🔟</h4>
+                                <p>🔒 Emoji</p>
+                            </button>
+                            <button disabled class="light sci-fi icon-pack locked">
+                                <h4>0-9</h4>
+                                <p>🔒 Sci-fi</p>
+                            </button>
+                            <button disabled class="light roman icon-pack locked">
+                                <h4>I-X</h4>
+                                <p>🔒 Roman Numerals</p>
+                            </button>
+                        </div>
+                    </div>
+                    <label><input type="checkbox" class="sfx-toggle" checked> SFX Enabled</label>
+                </div>
                 <hr>
                 <button class="close">❌ Close</button>
             </div>

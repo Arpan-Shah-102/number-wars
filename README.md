@@ -11,6 +11,12 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
+### The Foundations V0.85 - 2/9/2026
+1. Added Options Menu
+2. Touched Up old code
+3. New spinning animation when hovering over cell
+4. New cell states
+
 ### The Foundations V0.75 - 2/8/2026
 1. Continued Creating HTML & CSS
 2. Continued Sleek & Vibrand UI
