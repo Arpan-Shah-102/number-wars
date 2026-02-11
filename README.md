@@ -11,6 +11,12 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
+### The Foundations V1 - 2/20/2026
+1. Finished New UI
+2. Created JS so that you can now open and close the menus
+3. Work from previous updates finally visible
+4. Game in Beta alert and not made for mobile alert
+
 ### The Foundations V0.85 - 2/9/2026
 1. Added Options Menu
 2. Touched Up old code

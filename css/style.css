@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -178,7 +179,7 @@ footer {
             }
         }
     }
-    &.tutorial > div {
+    &.tutorial-pannel > div {
         & .interactive-demo {
             background: linear-gradient(135deg, lightblue, navy);
         }
@@ -354,10 +355,205 @@ footer {
             margin-bottom: 10px;
         }
     }
+    &.store-display > div > div {
+        & .floater.settings-floating {
+            left: auto;
+            right: 20px;
+            cursor: pointer;
+            background: linear-gradient(135deg, rebeccapurple, blueviolet);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 1);
+                box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.5);
+            }
+            &:active {
+                transform: translateY(4px);
+                opacity: 0.75;
+                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
+        & .shop-section {
+            margin-bottom: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+            & h3 {
+                color: rgb(255, 195, 0);
+                font-size: 1.75rem;
+            }
+            & > div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                gap: 20px;
+                padding: 10px;
+
+                & .shop-itm {
+                    border-radius: 8px;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    text-align: center;
+                    flex: 1 1 200px;
+                    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+                    border: 2px solid rgba(0, 0, 0, 0.5);
+
+                    &:not(.theme) {
+                        background: linear-gradient(135deg, rgba(240, 255, 255, 0.75), rgba(220, 239, 255, 0.75));
+
+                        &.bought {
+                            background: linear-gradient(135deg, rgb(50, 205, 50), rgb(144, 238, 144));
+                            border: 2px solid rgb(50, 205, 50);
+                            box-shadow: 0px 0px 12px limegreen;
+                        }
+                    }
+                    & abbr {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                    }
+                    & h4 {
+                        font-size: 1.2rem;
+                        margin-bottom: 6px;
+                        text-shadow: 0px 1px 12px black;
+                    }
+                    & p {
+                        font-size: 1rem;
+                        margin-bottom: 10px;
+                        text-shadow: 0px 2px 8px black;
+                    }
+                    & button {
+                        background-color: rgb(0, 153, 255);
+                        font-weight: bold;
+                    }
+                    &.bought button {
+                        background-color: gray;
+                        cursor: not-allowed;
+                        transform: none;
+                        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+                    }
+                    & * {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+    &.casino-display > div > div {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+        & .casino-games {
+            width: calc(100% - 10px);
+            margin: 0 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-evenly;
+
+            & .casino-game-btn {
+                flex: 1 1 200px;
+                background: linear-gradient(135deg, rgb(100, 100, 100), rgb(68, 68, 68));
+                border: 4px solid rgb(71, 71, 71);
+                box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+                border-radius: 12px;
+                padding: 20px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                gap: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+
+                &.unlockable {
+                    border: 4px solid rgba(0, 255, 115, 0.5);
+                    box-shadow: 0px 2px 8px rgb(0, 255, 115);
+                    
+                    &:hover {box-shadow: 0px 4px 12px rgb(0, 255, 115);}
+                    &:active {box-shadow: 0px 1px 6px rgb(0, 255, 115);}
+                }
+                &.unlocked {
+                    background: linear-gradient(135deg, rgb(0, 209, 94), rgb(144, 238, 144));
+                    border: 4px solid rgb(0, 136, 61);
+
+                    & h4 {
+                        display: none;
+                    }
+                }
+                &:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+                }
+                &:active {
+                    transform: translateY(2px);
+                    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.5);
+                    opacity: 0.75;
+                }
+                & h3 {
+                    color: rgb(255, 195, 0);
+                }
+                & p {
+                    font-size: 0.9rem;
+                    opacity: 0.9;
+                }
+                &.unlockable h4 {
+                    color: rgb(0, 255, 115);
+                }
+            }
+        }
+    }
+
+    &.load-in {
+        display: block;
+        animation: fadeIn 0.2s ease-in-out;
+    }
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 .locked {
     opacity: 0.5;
     cursor: not-allowed;
+}
+.sci-fi-font {
+    font-family: 'Orbitron', monospace;
+}
+.floater {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, gold, goldenrod);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    z-index: 3;
+}
+.credits-large {
+    background: linear-gradient(135deg, gold, goldenrod);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    width: calc(100% - 10px);
+    margin-bottom: 30px;
+    margin: 0 5px;
+
+    & p {
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+        color: rgb(255, 235, 120)
+    }
+    & h3 {
+        color: white !important;
+        font-size: 2.5rem;
+    }
 }
 
 button {
