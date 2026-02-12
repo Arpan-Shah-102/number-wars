@@ -401,6 +401,7 @@ footer {
                     flex: 1 1 200px;
                     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
                     border: 2px solid rgba(0, 0, 0, 0.5);
+                    opacity: 0.75;
 
                     &:not(.theme) {
                         background: linear-gradient(135deg, rgba(240, 255, 255, 0.75), rgba(220, 239, 255, 0.75));
@@ -409,6 +410,24 @@ footer {
                             background: linear-gradient(135deg, rgb(50, 205, 50), rgb(144, 238, 144));
                             border: 2px solid rgb(50, 205, 50);
                             box-shadow: 0px 0px 12px limegreen;
+                        }
+                    }
+                    &.unlockable {
+                        opacity: 1;
+
+                        & button {
+                            background-color: rgb(0, 153, 255);
+                            cursor: pointer;
+                            
+                            &:hover {
+                                transform: translateY(-2px) scale(1.025);
+                            }
+                            &:active {
+                                transform: translateY(2px) scale(0.975);
+                            }
+                        }
+                        & p {
+                            color: rgb(64, 255, 64);
                         }
                     }
                     & abbr {
@@ -427,8 +446,10 @@ footer {
                         text-shadow: 0px 2px 8px black;
                     }
                     & button {
-                        background-color: rgb(0, 153, 255);
+                        background-color: rgb(82, 82, 82);
                         font-weight: bold;
+                        transform: none;
+                        cursor: not-allowed;
                     }
                     &.bought button {
                         background-color: gray;
@@ -512,6 +533,50 @@ footer {
     &.load-in {
         display: block;
         animation: fadeIn 0.2s ease-in-out;
+    }
+
+    &.game-over {
+        &.tie h2 {
+            color: rgb(255, 195, 0);
+        }
+        &.win h2 {
+            color: rgb(64, 255, 64);
+        }
+        &.lose h2 {
+            color: rgb(255, 64, 64);
+        }
+        & > div {
+            animation: fadeIn 0.5s ease-in-out;
+            height: fit-content;
+            width: fit-content;
+            min-height: fit-content;
+
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 20px;
+
+            & .final-your-score {
+                color: rgb(64, 255, 64);
+                font-size: 1.25rem;
+            }
+            & .final-ai-score {
+                color: rgb(255, 64, 64);
+                font-size: 1.25rem;
+            }
+            & h4 span {
+                font-size: 1.5rem;
+            }
+            & h5 {
+                color: rgb(255, 195, 0);
+                margin: 10px 0px;
+            }
+            & button {
+                background: linear-gradient(135deg, limegreen, green);
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+        }
     }
 }
 @keyframes fadeIn {

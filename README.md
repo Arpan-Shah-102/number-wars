@@ -11,7 +11,14 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
-### The Foundations V1 - 2/20/2026
+### Adding Functionality V1.1 - 2/11/2026
+1. Fixed Problems with HTML & CSS
+2. Fixed Problems with JS
+3. Added game over screen
+4. Added sfx manager JS file
+5. Found & partially added sfx
+
+### The Foundations V1 - 2/10/2026
 1. Finished New UI
 2. Created JS so that you can now open and close the menus
 3. Work from previous updates finally visible

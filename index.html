@@ -109,7 +109,7 @@
             </section>
         </main>
 
-        <section class="display-pannel stats-display">
+        <section class="display-pannel main-display stats-display">
             <div>
                 <h2>📊 Statistics 📊</h2>
                 <hr>
@@ -162,7 +162,7 @@
             </div>
         </section>
 
-        <section class="display-pannel tutorial-pannel">
+        <section class="display-pannel main-display tutorial-pannel">
             <div>
                 <h2>📚 Tutorial 📚</h2>
                 <hr>
@@ -184,7 +184,7 @@
             </div>
         </section>
 
-        <section class="display-pannel options-display">
+        <section class="display-pannel main-display options-display">
             <div>
                 <h2>⚙️ Options ⚙️</h2>
                 <hr>
@@ -285,7 +285,7 @@
             </div>
         </section>
 
-        <section class="display-pannel store-display">
+        <section class="display-pannel main-display store-display">
             <div>
                 <h2>🛒 Store 🛒</h2>
                 <hr>
@@ -582,7 +582,7 @@
             </div>
         </section>
 
-        <section class="display-pannel casino-display">
+        <section class="display-pannel main-display casino-display">
             <div>
                 <h2>🎰 Casino 🎰</h2>
                 <hr>
@@ -636,7 +636,7 @@
             </div>
         </section>
 
-        <section class="display-pannel powerups-display">
+        <section class="display-pannel main-display powerups-display">
             <div>
                 <h2>⚡ Power-ups ⚡</h2>
                 <hr>
@@ -651,15 +651,28 @@
             </div>
         </section>
 
+        <section class="display-pannel game-over tie">
+            <div>
+                <h2>🎉 It's a tie! 🎉</h2>
+                <h4 class="final-your-score">Your score: <span class="final-score-num">0</span></h4>
+                <h4 class="final-ai-score">AI score: <span class="final-score-num">0</span></h4>
+                <h5 class="credits-result">No Credits Awarded</h5>
+                <button class="play-again">Play Again</button>
+            </div>
+        </section>
+
         <footer>
             &copy; 2026 Arpan Shah. All rights reserved.
-            <script>
-                const currentYear = new Date().getFullYear();
-                document.querySelector('footer').innerHTML = `&copy; ${currentYear} Arpan Shah. All rights reserved.`;
-            </script>
         </footer>
+        
+        <script>
+            let isMuted = false;
 
+            const currentYear = new Date().getFullYear();
+            document.querySelector('footer').innerHTML = `&copy; ${currentYear} Arpan Shah. All rights reserved.`;
+        </script>
         <script src="./js/utils.js"></script>
+        <script src="./js/sfx-manager.js"></script>
         <script src="./js/menus.js"></script>
         <script src="./js/script.js"></script>
     </body>
