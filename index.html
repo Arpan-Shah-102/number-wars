@@ -6,6 +6,7 @@
         <title>Number Wars</title>
         <link rel="icon" href="./assets/images/icon.png">
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/grid-sizes.css">
     </head>
 
     <body class="default">
@@ -40,12 +41,12 @@
             <section class="center pannel">
                 <div class="terminal">Click on a cell to play card!</div>
                 <div class="gameboard-section">
-                    <div class="gameboard-connections"></div>
+                    <svg class="gameboard-connections"></svg>
                     <div class="gameboard grid-5x5">
                         <div class="map-cell occupied" data-index="0" data-value="4"><p>4</p></div> <!-- Nuteral cell -->
                         <div class="map-cell red" data-index="1" data-value="5"><p>5</p></div> <!-- AI-owned cell -->
                         <div class="map-cell green" data-index="2" data-value="0"><p>0</p></div> <!-- Player-owned cell -->
-                        <div class="map-cell empty connection" data-index="3" data-value=""><p>O</p></div> <!-- Connection cell that shows possible connections near hover point -->
+                        <div class="map-cell empty connection-part" data-index="3" data-value=""><p>O</p></div> <!-- Connection cell that shows possible connections near hover point -->
                         <div class="map-cell empty helper" data-index="4" data-value=""><p>O</p></div> <!-- Helper cell that points out other matches -->
                         <div class="map-cell empty helping" data-index="5" data-value=""><p>8</p></div> <!-- Helper cell when you hover -->
                         <div class="map-cell empty" data-index="6" data-value=""><p>🔃</p></div>
@@ -131,6 +132,18 @@
                             <p>Win Rate</p>
                             <h3>0%</h3>
                         </div>
+                        <div class="games-played stat">
+                            <p>Games Played</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="highest-streak stat">
+                            <p>Highest Win Streak</p>
+                            <h3>0</h3>
+                        </div>
+                        <div class="current-streak stat">
+                            <p>Current Win Streak</p>
+                            <h3>0</h3>
+                        </div>
                     </div>
                     <div class="high-scores">
                         <h3>🏆 High Scores 🏆</h3>
@@ -139,16 +152,44 @@
                             <h3>0</h3>
                         </div>
                         <div class="gm-scores">
-                            <div class="gm-1 hs-stat">
-                                <p>Game Mode 1</p>
+                            <div class="classic-score hs-stat">
+                                <p>Classic</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="gm-2 hs-stat">
-                                <p>Game Mode 2</p>
+                            <div class="blitz-score hs-stat">
+                                <p>Blitz</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="gm-3 hs-stat">
-                                <p>Game Mode 3</p>
+                            <div class="sudden-death-score hs-stat">
+                                <p>Sudden Death</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="chain-reaction hs-stat">
+                                <p>Chain Reaction</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="reverse-rules-score hs-stat">
+                                <p>Reverse Rules</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="mirror-match-score hs-stat">
+                                <p>Mirror Match</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="subtraction-score hs-stat">
+                                <p>Subtraction</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="ludicrously-lucky-score hs-stat">
+                                <p>Ludicrously Lucky</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="fog-of-war-score hs-stat">
+                                <p>Fog of War</p>
+                                <h3>0</h3>
+                            </div>
+                            <div class="territorial-score hs-stat">
+                                <p>Territorial</p>
                                 <h3>0</h3>
                             </div>
                         </div>
@@ -219,8 +260,8 @@
                         <h3>🎮 Gamemode:</h3>
                         <select class="gamemode-select">
                             <option value="classic" selected>Classic (1x)</option>
-                            <option disabled class="locked" value="blitz">🔒 Blitz (2.5x)</option>
-                            <option disabled class="locked" value="sudden-death">🔒 Sudden Death (3.25x)</option>
+                            <option value="blitz">Blitz (2.5x)</option>
+                            <option value="sudden-death">🔒 Sudden Death (3.25x)</option>
                             <option disabled class="locked" value="chain-reaction">🔒 Chain Reaction (0.75x)</option>
                             <option disabled class="locked" value="reverse-rules">🔒 Reverse Rules (3.75x)</option>
                             <option disabled class="locked" value="mirror-match">🔒 Mirror Match (1.4x)</option>
@@ -243,18 +284,18 @@
                     <div class="setting-select btn-list">
                         <h3>🎨 Themes</h3>
                         <div>
-                            <button class="default theme-select selected">Default</button>
-                            <button class="dark theme-select">Dark</button>
-                            <button class="light theme-select">Light</button>
-                            <button class="nature theme-select">Nature</button>
-                            <button class="sunset theme-select">Sunset</button>
-                            <button class="ocean theme-select">Ocean</button>
-                            <button disabled class="fire theme-select locked">🔒 Fire</button>
-                            <button disabled class="midnight theme-select locked">🔒 Midnight</button>
-                            <button disabled class="royal theme-select locked">🔒 Royal</button>
-                            <button disabled class="lava theme-select locked">🔒 Lava</button>
-                            <button disabled class="cosmic theme-select locked">🔒 Cosmic</button>
-                            <button disabled class="seafoam theme-select locked">🔒 Seafoam</button>
+                            <button data-theme="default" class="default theme-select selected">Default</button>
+                            <button data-theme="dark" class="dark theme-select">Dark</button>
+                            <button data-theme="light" class="light theme-select">Light</button>
+                            <button data-theme="nature" class="nature theme-select">Nature</button>
+                            <button data-theme="sunset" class="sunset theme-select">Sunset</button>
+                            <button data-theme="ocean" class="ocean theme-select">Ocean</button>
+                            <button disabled data-theme="fire" class="fire theme-select locked">🔒 Fire</button>
+                            <button disabled data-theme="midnight" class="midnight theme-select locked">🔒 Midnight</button>
+                            <button disabled data-theme="royal" class="royal theme-select locked">🔒 Royal</button>
+                            <button disabled data-theme="lava" class="lava theme-select locked">🔒 Lava</button>
+                            <button disabled data-theme="cosmic" class="cosmic theme-select locked">🔒 Cosmic</button>
+                            <button disabled data-theme="seafoam" class="seafoam theme-select locked">🔒 Seafoam</button>
                         </div>
                     </div>
                     <div class="setting-select btn-list">
@@ -666,14 +707,14 @@
         </footer>
         
         <script>
-            let isMuted = false;
-
             const currentYear = new Date().getFullYear();
             document.querySelector('footer').innerHTML = `&copy; ${currentYear} Arpan Shah. All rights reserved.`;
         </script>
         <script src="./js/utils.js"></script>
         <script src="./js/sfx-manager.js"></script>
         <script src="./js/menus.js"></script>
-        <script src="./js/script.js"></script>
+        <script src="./js/customization.js"></script>
+        <script src="./js/gameboard.js"></script>
+        <script src="./js/main.js"></script>
     </body>
 </html>

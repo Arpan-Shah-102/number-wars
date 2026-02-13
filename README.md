@@ -11,6 +11,16 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
+### Adding Functionality V1.4 - 2/12/2026
+1. Added Paths
+2. Added Connecting Cells
+3. Updates Stats options
+4. Made reset data work (only mute toggle right now lol)
+5. Added utils functions
+6. Cells hover animation expanded
+7. Added Theme Customization
+8. Bug Fixes
+
 ### Adding Functionality V1.1 - 2/11/2026
 1. Fixed Problems with HTML & CSS
 2. Fixed Problems with JS

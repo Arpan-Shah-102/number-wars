@@ -7,13 +7,23 @@ let sfx = {
     mediumAction: new Audio('./assets/sounds/medium-action.mp3'),
     actionRejected: new Audio('./assets/sounds/action-rejected.mp3'),
 }
+let sfxCheckbox = document.querySelector('.sfx-toggle');
+sfxCheckbox.addEventListener('change', () => {
+    toggleMuted();
+});
 
 function playSound(sfx) {
-    if (!isMuted) {
+    if (!isMuted()) {
         let sound = sfx.cloneNode();
         sound.play();
         sound.addEventListener('ended', () => {
             sound.remove();
         });
+    }
+}
+
+window.onload = () => {
+    if (isMuted()) {
+        sfxCheckbox.checked = false;
     }
 }

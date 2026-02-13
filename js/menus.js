@@ -13,8 +13,10 @@ let menuBtns = [statsBtn, tutorialBtn, optionsBtn, storeBtn, casinoBtn, powerups
 let multiplierDropdown = document.querySelector('.multiplier-display');
 let allMultipliersDiv = document.querySelector('.all-multipliers');
 let multiplierArrow = multiplierDropdown.querySelector('.triangle');
+
 let switchToSettingsBtn = document.querySelector('.settings-floating');
 let gameOverPanel = document.querySelector('.game-over');
+let resetDataBtn = document.querySelector('.reset-data');
 
 menuBtns.forEach((btn, index) => {
     btn.addEventListener('click', () => {
@@ -56,4 +58,15 @@ gameOverPanel.addEventListener('click', (e) => {
     if (e.target === gameOverPanel) {
         gameOverPanel.classList.remove('load-in');
     }
+});
+resetDataBtn.addEventListener('click', () => {
+    playSound(sfx.mediumAction);
+    setTimeout(() => {
+        if (confirm("Are you sure you want to reset all your data? This action cannot be undone.")) {
+            if (!confirm("Are you really sure? Press OK to stop this action or Cancel to proceed.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    }, 150);
 });
