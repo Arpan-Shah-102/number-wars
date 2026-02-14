@@ -110,10 +110,10 @@ function getGameboardSize() {
     return JSON.parse(localStorage.getItem('gameboardSize')) || [5, 5];
 }
 function setGameboardSize(size) {
-    localStorage.setItem('gameboardSize', size);
+    localStorage.setItem('gameboardSize', JSON.stringify(size));
 }
 function getUnlockedGameboardSizes() {
-    return JSON.parse(localStorage.getItem('unlockedGameboardSizes')) || [[5, 5]];
+    return JSON.parse(localStorage.getItem('unlockedGameboardSizes')) || [[4, 4], [5, 5], [6, 6]];
 }
 function unlockGameboardSize(size) {
     let unlockedSizes = getUnlockedGameboardSizes();
@@ -130,7 +130,7 @@ function setAIDifficulty(difficulty) {
     localStorage.setItem('aiDifficulty', difficulty);
 }
 function getUnlockedAIDifficulties() {
-    return JSON.parse(localStorage.getItem('unlockedAIDifficulties')) || ["intermediate", "skilled", "advanced"];
+    return JSON.parse(localStorage.getItem('unlockedAIDifficulties')) || [0.4, 0.5, 0.6];
 }
 function unlockAIDifficulty(difficulty) {
     let unlockedDifficulties = getUnlockedAIDifficulties();
@@ -176,6 +176,9 @@ function getStats() {
         losses: 0,
         ties: 0,
         winRate: 0,
+        gamesPlayed: 0,
+        highestWinStreak: 0,
+        currentWinStreak: 0,
         highScores: {
             overall: 0,
             classic: 0,
@@ -185,7 +188,52 @@ function getStats() {
             reverseRules: 0,
             mirrorMatch: 0,
             subtraction: 0,
-            ludicrouslyLucky: 0
+            ludicrouslyLucky: 0,
+            fogOfWar: 0,
+            territorial: 0
         }
     }
 }
+function updateStats(stat, amount, operation = 'add') {
+    let stats = getStats();
+    if (stats[stat] !== undefined) {
+        if (operation === 'add') {
+            stats[stat] += amount;
+        } else if (operation === 'subtract') {
+            stats[stat] -= amount;
+        } else if (operation === 'set') {
+            stats[stat] = amount;
+        } else if (operation === 'reset') {
+            stats[stat] = 0;
+        }
+        localStorage.setItem('stats', JSON.stringify(stats));
+    }
+}
+
+function getUnlockedCasinoGames() {
+    return JSON.parse(localStorage.getItem('unlockedCasinoGames')) || [];
+}
+function getAllCasinoGames() {
+    return ['coin-flip', 'higher-lower', 'slots', 'blackjack', 'dice-duel', 'roulette'];
+}
+function getCasinoGamePrices() {
+    return {
+        'coin-flip': 10,
+        'higher-lower': 20,
+        'slots': 30,
+        'blackjack': 40,
+        'dice-duel': 50,
+        'roulette': 60
+    }
+}
+function unlockCasinoGame(game) {
+    let unlockedGames = getUnlockedCasinoGames();
+    if (!unlockedGames.includes(game)) {
+        unlockedGames.push(game);
+        localStorage.setItem('unlockedCasinoGames', JSON.stringify(unlockedGames));
+    }
+}
+
+function exportData() {}
+
+function importData() {}

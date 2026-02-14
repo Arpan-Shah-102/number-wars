@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="settings">
-                    <button class="new-game setting">🔄 New Game</button>
+                    <button class="new-game setting" onclick="newGame()">🔄 New Game</button>
                     <button class="options setting">⚙️ Options</button>
                     <button class="store setting">🛒 Store</button>
                     <button class="casino setting">🎰 Casino</button>
@@ -116,79 +116,79 @@
                 <hr>
                 <div class="stat-manager">
                     <div class="basic-stats">
-                        <div class="wins stat">
+                        <div data-stat-key="wins" class="wins stat">
                             <p>Wins</p>
                             <h3>0</h3>
                         </div>
-                        <div class="losses stat">
+                        <div data-stat-key="losses" class="losses stat">
                             <p>Losses</p>
                             <h3>0</h3>
                         </div>
-                        <div class="ties stat">
+                        <div data-stat-key="ties" class="ties stat">
                             <p>Ties</p>
                             <h3>0</h3>
                         </div>
-                        <div class="win-rate stat">
+                        <div data-stat-key="winRate" class="win-rate stat">
                             <p>Win Rate</p>
                             <h3>0%</h3>
                         </div>
-                        <div class="games-played stat">
+                        <div data-stat-key="gamesPlayed" class="games-played stat">
                             <p>Games Played</p>
                             <h3>0</h3>
                         </div>
-                        <div class="highest-streak stat">
+                        <div data-stat-key="highestWinStreak" class="highest-streak stat">
                             <p>Highest Win Streak</p>
                             <h3>0</h3>
                         </div>
-                        <div class="current-streak stat">
+                        <div data-stat-key="currentWinStreak" class="current-streak stat">
                             <p>Current Win Streak</p>
                             <h3>0</h3>
                         </div>
                     </div>
                     <div class="high-scores">
                         <h3>🏆 High Scores 🏆</h3>
-                        <div class="overall hs-stat">
+                        <div data-stat-key="overall" class="overall hs-stat">
                             <p>Overall</p>
                             <h3>0</h3>
                         </div>
                         <div class="gm-scores">
-                            <div class="classic-score hs-stat">
+                            <div data-stat-key="classic" class="classic-score hs-stat">
                                 <p>Classic</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="blitz-score hs-stat">
+                            <div data-stat-key="blitz" class="blitz-score hs-stat">
                                 <p>Blitz</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="sudden-death-score hs-stat">
+                            <div data-stat-key="suddenDeath" class="sudden-death-score hs-stat">
                                 <p>Sudden Death</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="chain-reaction hs-stat">
+                            <div data-stat-key="chainReaction" class="chain-reaction-score hs-stat">
                                 <p>Chain Reaction</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="reverse-rules-score hs-stat">
+                            <div data-stat-key="reverseRules" class="reverse-rules-score hs-stat">
                                 <p>Reverse Rules</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="mirror-match-score hs-stat">
+                            <div data-stat-key="mirrorMatch" class="mirror-match-score hs-stat">
                                 <p>Mirror Match</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="subtraction-score hs-stat">
+                            <div data-stat-key="subtraction" class="subtraction-score hs-stat">
                                 <p>Subtraction</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="ludicrously-lucky-score hs-stat">
+                            <div data-stat-key="ludicrouslyLucky" class="ludicrously-lucky-score hs-stat">
                                 <p>Ludicrously Lucky</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="fog-of-war-score hs-stat">
+                            <div data-stat-key="fogOfWar" class="fog-of-war-score hs-stat">
                                 <p>Fog of War</p>
                                 <h3>0</h3>
                             </div>
-                            <div class="territorial-score hs-stat">
+                            <div data-stat-key="territorial" class="territorial-score hs-stat">
                                 <p>Territorial</p>
                                 <h3>0</h3>
                             </div>
@@ -246,14 +246,14 @@
                     <div class="setting-select dropdown">
                         <h3>🧩 Board Size:</h3>
                         <select class="board-size-select">
-                            <option disabled class="locked" value="3">🔒 3x3 (Miniscule)</option>
-                            <option value="4">4x4 (Small)</option>
-                            <option value="5" selected>5x5 (Classic)</option>
-                            <option value="6">6x6 (Normal)</option>
-                            <option disabled class="locked" value="7">🔒 7x7 (Medium)</option>
-                            <option disabled class="locked" value="8">🔒 8x8 (Large)</option>
-                            <option disabled class="locked" value="9">🔒 9x9 (Huge)</option>
-                            <option disabled class="locked" value="10">🔒 10x10 (Colossal)</option>
+                            <option disabled class="locked" value="3x3">🔒 3x3 (Miniscule)</option>
+                            <option value="4x4">4x4 (Small)</option>
+                            <option value="5x5" selected>5x5 (Classic)</option>
+                            <option value="6x6">6x6 (Normal)</option>
+                            <option disabled class="locked" value="7x7">🔒 7x7 (Medium)</option>
+                            <option disabled class="locked" value="8x8">🔒 8x8 (Large)</option>
+                            <option disabled class="locked" value="9x9">🔒 9x9 (Huge)</option>
+                            <option disabled class="locked" value="10x10">🔒 10x10 (Colossal)</option>
                         </select>
                     </div>
                     <div class="setting-select dropdown">
@@ -261,7 +261,7 @@
                         <select class="gamemode-select">
                             <option value="classic" selected>Classic (1x)</option>
                             <option value="blitz">Blitz (2.5x)</option>
-                            <option value="sudden-death">🔒 Sudden Death (3.25x)</option>
+                            <option value="sudden-death">Sudden Death (3.25x)</option>
                             <option disabled class="locked" value="chain-reaction">🔒 Chain Reaction (0.75x)</option>
                             <option disabled class="locked" value="reverse-rules">🔒 Reverse Rules (3.75x)</option>
                             <option disabled class="locked" value="mirror-match">🔒 Mirror Match (1.4x)</option>
@@ -274,11 +274,11 @@
                     <div class="setting-select label-list">
                         <h3>🎛️ Modifiers</h3>
                         <div>
-                            <label><input type="checkbox" class="modifier" value="helper-cells">Helper Cells - See how many points you could get on a move (0.5x)</label>
-                            <label><input disabled type="checkbox" class="modifier locked" value="ai-first">🔒 AI Uprising - AI makes the first move (1.05x)</label>
-                            <label><input disabled type="checkbox" class="modifier locked" value="no-bonus-points">🔒 F2P Friendly - No bonus points after round ends (1.2x)</label>
-                            <label><input disabled type="checkbox" class="modifier locked" value="no-powerups">🔒 Superpowerless - No power-ups useable (1.2x)</label>
-                            <label><input disabled type="checkbox" class="modifier locked" value="maintained-paths">🔒 Maintained Paths - All paths are connected (0.75x)</label>
+                            <label><input type="checkbox" class="modifier" value="helper-cells"><span>Helper Cells - See how many points you could get on a move (0.5x)</span></label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="ai-first"><span>🔒 AI Uprising - AI makes the first move (1.05x)</span></label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="no-bonus-points"><span>🔒 F2P Friendly - No bonus points after round ends (1.2x)</span></label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="no-powerups"><span>🔒 Superpowerless - No power-ups useable (1.2x)</span></label>
+                            <label><input disabled type="checkbox" class="modifier locked" value="maintained-paths"><span>🔒 Maintained Paths - All paths are connected (0.75x)</span></label>
                         </div>
                     </div>
                     <div class="setting-select btn-list">
@@ -301,22 +301,29 @@
                     <div class="setting-select btn-list">
                         <h3>🎁 Icon Packs</h3>
                         <div>
-                            <button disabled class="light default icon-pack selected">
+                            <button data-icon-pack="default" class="light default icon-pack selected">
                                 <h4>0-9</h4>
                                 <p>Default</p>
                             </button>
-                            <button disabled class="light emoji icon-pack locked">
+                            <button  data-icon-pack="emoji" disabled class="light emoji icon-pack locked">
                                 <h4>1️⃣-🔟</h4>
                                 <p>🔒 Emoji</p>
                             </button>
-                            <button disabled class="light roman icon-pack locked">
+                            <button data-icon-pack="roman" disabled class="light roman icon-pack locked">
                                 <h4>I-X</h4>
                                 <p>🔒 Roman Numerals</p>
                             </button>
-                            <button disabled class="light sci-fi icon-pack locked">
+                            <button data-icon-pack="sci-fi" disabled class="light sci-fi icon-pack locked">
                                 <h4 class="sci-fi-font">0-9</h4>
                                 <p>🔒 Sci-fi</p>
                             </button>
+                        </div>
+                    </div>
+                    <div class="setting-select btn-list">
+                        <h3>📂 Data Options</h3>
+                        <div>
+                            <button class="export-data data-option">📤 Export Data to File</button>
+                            <button class="import-data data-option">📥 Import Data from File</button>
                         </div>
                     </div>
                     <label><input type="checkbox" class="sfx-toggle" checked> SFX Enabled</label>
@@ -343,32 +350,32 @@
                             <div class="shop-itm powerup">
                                 <h4>⏩ Skip AI Turn</h4>
                                 <p>1 Credit</p>
-                                <button class="buy-powerup" data-powerup="skip-ai">Buy</button>
+                                <button class="buy-powerup" data-price="1" data-powerup="skip-ai">Buy</button>
                             </div>
                             <div class="shop-itm powerup">
                                 <h4>🔄 Replace Card</h4>
                                 <p>0.5 Credits</p>
-                                <button class="buy-powerup" data-powerup="replace-card">Buy</button>
+                                <button class="buy-powerup" data-price="0.5" data-powerup="replace-card">Buy</button>
                             </div>
                             <div class="shop-itm powerup">
                                 <h4>👁️ View Next Card</h4>
                                 <p>1.5 Credits</p>
-                                <button class="buy-powerup" data-powerup="view-next">Buy</button>
+                                <button class="buy-powerup" data-price="1.5" data-powerup="view-next">Buy</button>
                             </div>
                             <div class="shop-itm powerup">
                                 <h4>↩️ Undo Move</h4>
                                 <p>2 Credits</p>
-                                <button class="buy-powerup" data-powerup="undo-move">Buy</button>
+                                <button class="buy-powerup" data-price="2" data-powerup="undo-move">Buy</button>
                             </div>
                             <div class="shop-itm powerup">
                                 <h4>🃏 Pick Card</h4>
                                 <p>3 Credits</p>
-                                <button class="buy-powerup" data-powerup="pick-card">Buy</button>
+                                <button class="buy-powerup" data-price="3" data-powerup="pick-card">Buy</button>
                             </div>
                             <div class="shop-itm powerup">
                                 <h4>💰 Double Credits for Round</h4>
                                 <p>10 Credits</p>
-                                <button class="buy-powerup" data-powerup="double-credits">Buy</button>
+                                <button class="buy-powerup" data-price="10" data-powerup="double-credits">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -378,27 +385,27 @@
                             <div class="shop-itm board">
                                 <h4>🧩 3x3 (Miniscule)</h4>
                                 <p>2.5 Credits</p>
-                                <button class="buy-board" data-size="3">Buy</button>
+                                <button class="buy-board" data-price="2.5" data-size="3">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 7x7 (Medium)</h4>
                                 <p>5 Credits</p>
-                                <button class="buy-board" data-size="7">Buy</button>
+                                <button class="buy-board" data-price="5" data-size="7">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 8x8 (Large)</h4>
                                 <p>7.5 Credits</p>
-                                <button class="buy-board" data-size="8">Buy</button>
+                                <button class="buy-board" data-price="7.5" data-size="8">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 9x9 (Huge)</h4>
                                 <p>10 Credits</p>
-                                <button class="buy-board" data-size="9">Buy</button>
+                                <button class="buy-board" data-price="10" data-size="9">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 10x10 (Colossal)</h4>
                                 <p>15 Credits</p>
-                                <button class="buy-board" data-size="10">Buy</button>
+                                <button class="buy-board" data-price="15" data-size="10">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -406,66 +413,52 @@
                         <h3>🎮 Gamemodes</h3>
                         <div>
                             <div class="shop-itm gamemode">
-                                <abbr title="It's a race! Turns are ignored, it's a free-for-all.">
-                                    <h4>🎮 Blitz</h4>
-                                    <p>2.5 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="blitz">Buy</button>
-                                </abbr>
-                            </div>
-                            <div class="shop-itm gamemode">
-                                <abbr title="First to reach 10 points wins!">
-                                    <h4>🎮 Sudden Death</h4>
-                                    <p>5 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="sudden-death">Buy</button>
-                                </abbr>
-                            </div>
-                            <div class="shop-itm gamemode">
                                 <abbr title="Create chain reactions! Scoring on a cell gives you an extra turn.">
                                     <h4>🎮 Chain Reaction</h4>
                                     <p>7.5 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="chain-reaction">Buy</button>
+                                    <button class="buy-gamemode" data-price="7.5" data-gamemode="chain-reaction">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="Reverse the scoring rules! Lowest score wins.">
                                     <h4>🎮 Reverse Rules</h4>
                                     <p>10 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="reverse-rules">Buy</button>
+                                    <button class="buy-gamemode" data-price="10" data-gamemode="reverse-rules">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="You and the AI have the same cards each round! It's all about strategy.">
                                     <h4>🎮 Mirror Match</h4>
                                     <p>15 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="mirror-match">Buy</button>
+                                    <button class="buy-gamemode" data-price="15" data-gamemode="mirror-match">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="For each point you get, take away one from the AI (and vice versa)!">
                                     <h4>🎮 Subtraction</h4>
                                     <p>20 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="subtraction">Buy</button>
+                                    <button class="buy-gamemode" data-price="20" data-gamemode="subtraction">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="Game could end on any turn! Have the highest points consistantly or it could backfire!">
                                     <h4>🎮 Ludicrously Lucky</h4>
                                     <p>30 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="ludicrously-lucky">Buy</button>
+                                    <button class="buy-gamemode" data-price="30" data-gamemode="ludicrously-lucky">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="You can only see the value of cells you can connect to.">
                                     <h4>🎮 Fog of War</h4>
                                     <p>50 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="fog-of-war">Buy</button>
+                                    <button class="buy-gamemode" data-price="50" data-gamemode="fog-of-war">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm gamemode">
                                 <abbr title="Claim territory! Score points by owning cells instead of scoring connections.">
                                     <h4>🎮 Territorial</h4>
                                     <p>50 Credits</p>
-                                    <button class="buy-gamemode" data-gamemode="territorial">Buy</button>
+                                    <button class="buy-gamemode" data-price="50" data-gamemode="territorial">Buy</button>
                                 </abbr>
                             </div>
                         </div>
@@ -477,28 +470,28 @@
                                 <abbr title="AI Goes First">
                                     <h4>🎛️ AI Uprising</h4>
                                     <p>1 Credit</p>
-                                    <button class="buy-modifier" data-modifier="ai-first">Buy</button>
+                                    <button class="buy-modifier" data-price="1" data-modifier="ai-first">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm modifier">
                                 <abbr title="No Bonus Points">
                                     <h4>🎛️ F2P Friendly</h4>
                                     <p>2.5 Credits</p>
-                                    <button class="buy-modifier" data-modifier="no-bonus-points">Buy</button>
+                                    <button class="buy-modifier" data-price="2.5" data-modifier="no-bonus-points">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm modifier">
                                 <abbr title="No Powerups">
                                     <h4>🎛️ Superpowerless</h4>
                                     <p>2.5 Credits</p>
-                                    <button class="buy-modifier" data-modifier="no-powerups">Buy</button>
+                                    <button class="buy-modifier" data-price="2.5" data-modifier="no-powerups">Buy</button>
                                 </abbr>
                             </div>
                             <div class="shop-itm modifier">
                                 <abbr title="All Cells Are Connected">
                                     <h4>🎛️ Maintained Paths</h4>
                                     <p>7.5 Credits</p>
-                                    <button class="buy-modifier" data-modifier="maintained-paths">Buy</button>
+                                    <button class="buy-modifier" data-price="7.5" data-modifier="maintained-paths">Buy</button>
                                 </abbr>
                             </div>
                         </div>
@@ -509,27 +502,27 @@
                             <div class="shop-itm ai">
                                 <h4>🤖 Novice (0.5x)</h4>
                                 <p>1 Credits</p>
-                                <button class="buy-ai" data-difficulty="0.2">Buy</button>
+                                <button class="buy-ai" data-price="1" data-difficulty="0.2">Buy</button>
                             </div>
                             <div class="shop-itm ai">
                                 <h4>🤖 Beginner (0.75x)</h4>
                                 <p>2 Credits</p>
-                                <button class="buy-ai" data-difficulty="0.3">Buy</button>
+                                <button class="buy-ai" data-price="2" data-difficulty="0.3">Buy</button>
                             </div>
                             <div class="shop-itm ai">
                                 <h4>🤖 Expert (1.3x)</h4>
                                 <p>3 Credits</p>
-                                <button class="buy-ai" data-difficulty="0.7">Buy</button>
+                                <button class="buy-ai" data-price="3" data-difficulty="0.7">Buy</button>
                             </div>
                             <div class="shop-itm ai">
                                 <h4>🤖 Pro (1.4x)</h4>
                                 <p>5 Credits</p>
-                                <button class="buy-ai" data-difficulty="0.8">Buy</button>
+                                <button class="buy-ai" data-price="5" data-difficulty="0.8">Buy</button>
                             </div>
                             <div class="shop-itm ai">
                                 <h4>🤖 Master (1.5x)</h4>
                                 <p>7.5 Credits</p>
-                                <button class="buy-ai" data-difficulty="0.9">Buy</button>
+                                <button class="buy-ai" data-price="7.5" data-difficulty="0.9">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -539,32 +532,32 @@
                             <div class="shop-itm theme fire">
                                 <h4>🎨 Fire</h4>
                                 <p>2.5 Credits</p>
-                                <button class="buy-theme" data-theme="fire">Buy</button>
+                                <button class="buy-theme" data-price="2.5" data-theme="fire">Buy</button>
                             </div>
                             <div class="shop-itm theme midnight">
                                 <h4>🎨 Midnight</h4>
                                 <p>5 Credits</p>
-                                <button class="buy-theme" data-theme="midnight">Buy</button>
+                                <button class="buy-theme" data-price="5" data-theme="midnight">Buy</button>
                             </div>
                             <div class="shop-itm theme royal">
                                 <h4>🎨 Royal</h4>
                                 <p>7.5 Credits</p>
-                                <button class="buy-theme" data-theme="royal">Buy</button>
+                                <button class="buy-theme" data-price="7.5" data-theme="royal">Buy</button>
                             </div>
                             <div class="shop-itm theme lava">
                                 <h4>🎨 Lava</h4>
                                 <p>12.5 Credits</p>
-                                <button class="buy-theme" data-theme="lava">Buy</button>
+                                <button class="buy-theme" data-price="12.5" data-theme="lava">Buy</button>
                             </div>
                             <div class="shop-itm theme cosmic">
                                 <h4>🎨 Cosmic</h4>
                                 <p>25 Credits</p>
-                                <button class="buy-theme" data-theme="cosmic">Buy</button>
+                                <button class="buy-theme" data-price="25" data-theme="cosmic">Buy</button>
                             </div>
                             <div class="shop-itm theme seafoam">
                                 <h4>🎨 Seafoam</h4>
                                 <p>50 Credits</p>
-                                <button class="buy-theme" data-theme="seafoam">Buy</button>
+                                <button class="buy-theme" data-price="50" data-theme="seafoam">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -574,17 +567,17 @@
                             <div class="shop-itm icon-pack">
                                 <h4>🎁 Emoji</h4>
                                 <p>1 Credit</p>
-                                <button class="buy-icon-pack" data-pack="emoji">Buy</button>
+                                <button class="buy-icon-pack" data-price="1" data-pack="emoji">Buy</button>
                             </div>
                             <div class="shop-itm icon-pack">
                                 <h4>🎁 Roman Numerals</h4>
                                 <p>2.5 Credits</p>
-                                <button class="buy-icon-pack" data-pack="roman">Buy</button>
+                                <button class="buy-icon-pack" data-price="2.5" data-pack="roman">Buy</button>
                             </div>
                             <div class="shop-itm icon-pack">
                                 <h4>🎁 Sci-fi</h4>
                                 <p>5 Credits</p>
-                                <button class="buy-icon-pack" data-pack="sci-fi">Buy</button>
+                                <button class="buy-icon-pack" data-price="5" data-pack="sci-fi">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -595,25 +588,25 @@
                                 <h4>🌌 Out of this world</h4>
                                 <p>Includes:<br>Cosmic Theme | Sci-fi Icon Pack | AI Uprising Modifier | 8x8 Board</p>
                                 <p>35 Credits</p>
-                                <button class="buy-bundle" data-bundle="out-of-this-world">Buy</button>
+                                <button class="buy-bundle" data-price="35" data-bundle="out-of-this-world">Buy</button>
                             </div>
                             <div class="shop-itm bundle">
                                 <h4>⚡ Power Booster</h4>
                                 <p>Includes:<br>2 Skip AI Turn Powerups | 3 Replace Card Powerups | 2 View Next Card Powerups | 2 Undo Move Powerups | 1 Pick Card Powerup | 1 Double Points Powerup</p>
                                 <p>20 Credits</p>
-                                <button class="buy-bundle" data-bundle="power-booster">Buy</button>
+                                <button class="buy-bundle" data-price="20" data-bundle="power-booster">Buy</button>
                             </div>
                         </div>
                     </div>
                     <div class="shop-section">
                         <h3>✖️ Base Multiplier</h3>
                         <div>
-                            <div class="shop-itm">
+                            <div class="shop-itm multiplier-upgrade">
                                 <h4>✖️ Increase Base Credits Multiplier</h4>
                                 <p>Current: +<span class="current-multiplier">1.0</span>x | Next: +<span class="next-multiplier">1.1</span>x</p>
                                 <p>Max: 5.0x</p>
                                 <h5 class="multiplier-upgrade-cost">25 Credits</h5>
-                                <button class="buy-multiplier-upgrade">Buy Upgrade</button>
+                                <button data-price="25" class="buy-multiplier-upgrade">Buy Upgrade</button>
                             </div>
                         </div>
                     </div>
@@ -634,37 +627,37 @@
                         <h3>0.0</h3>
                     </div>
                     <div class="casino-games">
-                        <div class="casino-game-btn coinflip">
+                        <div data-casino-game="coin-flip" class="casino-game-btn coinflip">
                             <h2>🪙</h2>
                             <h3>Coin Flip</h3>
                             <p>Bet on Heads or Tails for 2x Payout</p>
                             <h4>🔒 10 Credits</h4>
                         </div>
-                        <div class="casino-game-btn higher-lower">
+                        <div data-casino-game="higher-lower" class="casino-game-btn higher-lower">
                             <h2>📊</h2>
                             <h3>Higher or Lower</h3>
                             <p>Guess if the next card is higher or lower for 1.5x Payout</p>
                             <h4>🔒 20 Credits</h4>
                         </div>
-                        <div class="casino-game-btn slots">
+                        <div data-casino-game="slots" class="casino-game-btn slots">
                             <h2>🎰</h2>
                             <h3>Slotmachine</h3>
                             <p>Match 3 to Win 77.7 Credits!</p>
                             <h4>🔒 30 Credits</h4>
                         </div>
-                        <div class="casino-game-btn blackjack">
+                        <div data-casino-game="blackjack" class="casino-game-btn blackjack">
                             <h2>🃏</h2>
                             <h3>Blackjack</h3>
                             <p>Beat the Dealer's Hand without going over 21 for 2x Payout</p>
                             <h4>🔒 40 Credits</h4>
                         </div>
-                        <div class="casino-game-btn dice-duel">
+                        <div data-casino-game="dice-duel" class="casino-game-btn dice-duel">
                             <h2>🎲</h2>
                             <h3>Dice Duel</h3>
                             <p>Roll Higher than the dealer for 2x Payout</p>
                             <h4>🔒 50 Credits</h4>
                         </div>
-                        <div class="casino-game-btn roulette">
+                        <div data-casino-game="roulette" class="casino-game-btn roulette">
                             <h2>🎡</h2>
                             <h3>Roulette</h3>
                             <p>Bet on a number, color, or section for varying payouts up to 35x!</p>
@@ -681,12 +674,12 @@
             <div>
                 <h2>⚡ Power-ups ⚡</h2>
                 <hr>
-                <button class="powerup skip-ai"><p>⏩ Skip AI Turn</p><p class="remaining">1</p></button>
-                <button class="powerup replace-card"><p>🔄 Replace Card</p><p class="remaining">3</p></button>
-                <button class="powerup view-next"><p>👁️ View Next Card</p><p class="remaining">1</p></button>
-                <button class="powerup disabled undo-move"><p>↩️ Undo Move</p><p class="remaining">1</p></button>
-                <button class="powerup disabled pick-card"><p>🃏 Pick Card</p><p class="remaining">0</p></button>
-                <button class="powerup disabled double-credits"><p>💰 Double Credits for Round</p><p class="remaining">0</p></button>
+                <button data-powerup-name="skip-ai" class="powerup skip-ai"><p>⏩ Skip AI Turn</p><p class="remaining">1</p></button>
+                <button data-powerup-name="replace-card" class="powerup replace-card"><p>🔄 Replace Card</p><p class="remaining">3</p></button>
+                <button data-powerup-name="view-next" class="powerup view-next"><p>👁️ View Next Card</p><p class="remaining">1</p></button>
+                <button data-powerup-name="undo-move" class="powerup disabled undo-move"><p>↩️ Undo Move</p><p class="remaining">1</p></button>
+                <button disabled data-powerup-name="pick-card" class="powerup disabled pick-card"><p>🃏 Pick Card</p><p class="remaining">0</p></button>
+                <button disabled data-powerup-name="double-credits" class="powerup disabled double-credits"><p>💰 Double Credits for Round</p><p class="remaining">0</p></button>
                 <hr>
                 <button class="close">❌ Close</button>
             </div>
@@ -698,7 +691,7 @@
                 <h4 class="final-your-score">Your score: <span class="final-score-num">0</span></h4>
                 <h4 class="final-ai-score">AI score: <span class="final-score-num">0</span></h4>
                 <h5 class="credits-result">No Credits Awarded</h5>
-                <button class="play-again">Play Again</button>
+                <button class="play-again" onclick="newGame()">Play Again</button>
             </div>
         </section>
 

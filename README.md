@@ -11,6 +11,14 @@ Use the items you got in the **store** in the **settings** and change up your ga
 
 ## Update Log
 
+### Adding Functionality V1.55 - 2/13/2026
+1. Fixed Paths Bug
+2. Expanded Customization
+3. Added new Utils Functions
+4. Created various customization functions to updated different components
+5. New game buttons work (kinda)
+6. Bug Fixes
+
 ### Adding Functionality V1.4 - 2/12/2026
 1. Added Paths
 2. Added Connecting Cells

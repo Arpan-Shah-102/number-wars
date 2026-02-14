@@ -110,7 +110,7 @@ function generateGameboardGrid() {
 
 function generateGameboard() {
     gameboard.innerHTML = '';
-    gameboard.className = 'gameboard grid-'+gameboardHeight+'x'+gameboardWidth;
+    gameboard.className = 'gameboard grid-'+gameboardWidth+'x'+gameboardHeight;
     for (let i = 0; i < gameboardHeight * gameboardWidth; i++) {
         let cell = document.createElement('div');
         cell.classList.add('map-cell');
@@ -125,34 +125,45 @@ function generateGameboard() {
     gameboardCells = document.querySelectorAll('.gameboard .map-cell')
 }
 
-generateGameboardGrid();
-generateGameboard();
-generateConnectionsList();
-generateConnections();
+function attachCellEventListeners() {
+    gameboardCells.forEach((cell, index) => {
+        cell.addEventListener('mouseenter', () => {
+            let row = Math.floor(index / gameboardWidth);
+            let col = index % gameboardWidth;
+            let cellKey = `${row},${col}`;
+            let adjacentCells = gameboardConnections[cellKey] || [];
 
-gameboardCells.forEach((cell, index) => {
-    cell.addEventListener('mouseenter', () => {
-        let row = Math.floor(index / gameboardWidth);
-        let col = index % gameboardWidth;
-        let cellKey = `${row},${col}`;
-        let adjacentCells = gameboardConnections[cellKey] || [];
+            adjacentCells.forEach(connectedCellKey => {
+                const [r, c] = connectedCellKey.split(',').map(Number);
+                const connectedCell = gameboardCells[r * gameboardWidth + c];
+                connectedCell.classList.add('connection-part');
 
-        adjacentCells.forEach(connectedCellKey => {
-            const [r, c] = connectedCellKey.split(',').map(Number);
-            const connectedCell = gameboardCells[r * gameboardWidth + c];
-            connectedCell.classList.add('connection-part');
+                const key = [cellKey, connectedCellKey].sort().join('->');
+                const line = connectionLineMap.get(key);
+                if (line) line.classList.add('connection-part');
+            });
+        });
 
-            const key = [cellKey, connectedCellKey].sort().join('->');
-            const line = connectionLineMap.get(key);
-            if (line) line.classList.add('connection-part');
+        cell.addEventListener('mouseleave', () => {
+            gameboardCells.forEach(cell => cell.classList.remove('connection-part'));
+            connectionLineMap.forEach(line => line.classList.remove('connection-part'));
         });
     });
+}
 
-    cell.addEventListener('mouseleave', () => {
-        gameboardCells.forEach(cell => cell.classList.remove('connection-part'));
-        connectionLineMap.forEach(line => line.classList.remove('connection-part'));
-    });
-});
+function createFullBoard(height = getGameboardSize()[0], width = getGameboardSize()[1]) {
+    gameboardHeight = height;
+    gameboardWidth = width;
+
+    generateGameboardGrid();
+    generateGameboard();
+    generateConnectionsList();
+    generateConnections();
+    attachCellEventListeners();
+
+    setGameboardSize([height, width]);
+}
+createFullBoard();
 
 function debounce(func, delay) {
     let timeout;
