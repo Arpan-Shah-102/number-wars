@@ -10,6 +10,14 @@ Use the items you got in the **store** in the **settings** and change up your ga
 <br>
 
 ## Update Log
+### Daily Updates as Always!
+
+### Adding Functionality V1.65 - 2/14/2026
+1. Updated Store Customization
+2. Added Pass and Play Skeleton
+3. Created Game Functionality File
+4. Prparing for game functionality
+5. Bug Fixes
 
 ### Adding Functionality V1.55 - 2/13/2026
 1. Fixed Paths Bug

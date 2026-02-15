@@ -326,7 +326,8 @@
                             <button class="import-data data-option">📥 Import Data from File</button>
                         </div>
                     </div>
-                    <label><input type="checkbox" class="sfx-toggle" checked> SFX Enabled</label>
+                    <label><input type="checkbox" class="pass-and-play-toggle something"> Pass and Play Enabled</label>
+                    <label><input type="checkbox" class="sfx-toggle something" checked> SFX Enabled</label>
                 </div>
                 <hr>
                 <button class="close">❌ Close</button>
@@ -385,27 +386,27 @@
                             <div class="shop-itm board">
                                 <h4>🧩 3x3 (Miniscule)</h4>
                                 <p>2.5 Credits</p>
-                                <button class="buy-board" data-price="2.5" data-size="3">Buy</button>
+                                <button class="buy-board" data-price="2.5" data-size="3x3">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 7x7 (Medium)</h4>
                                 <p>5 Credits</p>
-                                <button class="buy-board" data-price="5" data-size="7">Buy</button>
+                                <button class="buy-board" data-price="5" data-size="7x7">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 8x8 (Large)</h4>
                                 <p>7.5 Credits</p>
-                                <button class="buy-board" data-price="7.5" data-size="8">Buy</button>
+                                <button class="buy-board" data-price="7.5" data-size="8x8">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 9x9 (Huge)</h4>
                                 <p>10 Credits</p>
-                                <button class="buy-board" data-price="10" data-size="9">Buy</button>
+                                <button class="buy-board" data-price="10" data-size="9x9">Buy</button>
                             </div>
                             <div class="shop-itm board">
                                 <h4>🧩 10x10 (Colossal)</h4>
                                 <p>15 Credits</p>
-                                <button class="buy-board" data-price="15" data-size="10">Buy</button>
+                                <button class="buy-board" data-price="15" data-size="10x10">Buy</button>
                             </div>
                         </div>
                     </div>
@@ -606,7 +607,7 @@
                                 <p>Current: +<span class="current-multiplier">1.0</span>x | Next: +<span class="next-multiplier">1.1</span>x</p>
                                 <p>Max: 5.0x</p>
                                 <h5 class="multiplier-upgrade-cost">25 Credits</h5>
-                                <button data-price="25" class="buy-multiplier-upgrade">Buy Upgrade</button>
+                                <button data-price="25" data-multiplier-upgrade="buy-multiplier-upgrade">Buy Upgrade</button>
                             </div>
                         </div>
                     </div>
@@ -708,6 +709,7 @@
         <script src="./js/menus.js"></script>
         <script src="./js/customization.js"></script>
         <script src="./js/gameboard.js"></script>
+        <script src="./js/game-functions.js"></script>
         <script src="./js/main.js"></script>
     </body>
 </html>

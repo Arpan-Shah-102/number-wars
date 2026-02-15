@@ -197,12 +197,81 @@ function updatePowerupButtons() {
     });
 }
 
+let shopItems = document.querySelectorAll('.shop-itm');
+function getShopItemMeta(button) {
+    const ds = button.dataset;
+    if (ds.powerup) return { category: "powerups", key: ds.powerup, repeatable: true };
+    if (ds.size) return { category: "boardSizes", key: ds.size };
+    if (ds.gamemode) return { category: "gamemodes", key: ds.gamemode };
+    if (ds.modifier) return { category: "modifiers", key: ds.modifier };
+    if (ds.difficulty) return { category: "aiDifficulties", key: ds.difficulty };
+    if (ds.theme) return { category: "themes", key: ds.theme };
+    if (ds.pack) return { category: "iconPacks", key: ds.pack };
+    if (ds.bundle) return { category: "bundles", key: ds.bundle, repeatable: true };
+    if (ds.multiplierUpgrade) return { category: "multiplierUpgrade", key: ds.multiplierUpgrade, repeatable: true };
+    return null;
+}
+function updateShopItems() {
+    const credits = getCredits();
+
+    shopItems.forEach(item => {
+        const button = item.querySelector('button');
+        const price = parseFloat(button.dataset.price);
+        const meta = getShopItemMeta(button);
+
+        item.classList.remove('bought', 'unlockable');
+        button.disabled = false;
+
+        if (!meta) return;
+
+        const bought = !meta.repeatable && isStoreItemBought(meta.category, meta.key);
+        if (bought) {
+            item.classList.add('bought');
+            button.disabled = true;
+            return;
+        }
+
+        if (price <= credits) {
+            item.classList.add('unlockable');
+        } else {
+            button.disabled = true;
+        }
+    });
+}
+shopItems.forEach(item => {
+    item.querySelector('button').addEventListener('click', () => {
+        const button = item.querySelector('button');
+        const price = parseFloat(button.dataset.price);
+        const meta = getShopItemMeta(button);
+
+        if (price <= getCredits()) {
+            if (meta && !meta.repeatable) {
+                buyStoreItem(meta.category, meta.key);
+            }
+            updateStats();
+            updateThemeBtns();
+            updateIconPackBtns();
+            updateBoardSizeDropdown();
+            updateAIDifficultyDropdown();
+            updateGameModeDropdown();
+            updateModifierCheckboxes();
+            updateCasinoGames();
+            updatePowerupButtons();
+            updateShopItems();
+            playSound(sfx.action);
+        } else {
+            alert("You don't have enough credits to buy this item.");
+        }
+    });
+});
+
 updateThemeBtns();
 updateIconPackBtns();
 updateBoardSizeDropdown();
 updateAIDifficultyDropdown();
 updateGameModeDropdown();
 updateModifierCheckboxes();
+updateShopItems();
 
 updateCasinoGames();
 updatePowerupButtons();

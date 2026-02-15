@@ -358,12 +358,14 @@ footer {
                 }
             }
         }
-        & label:has(> input.sfx-toggle) {
+        & label:has(> input.something) {
             margin-left: 20px;
+            width: fit-content;
             transform: scale(1.1);
             font-weight: bold;
             margin-bottom: 20px;
             cursor: pointer;
+            display: block;
         }
     }
     &.store-display > div > div {

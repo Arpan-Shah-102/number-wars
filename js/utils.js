@@ -1,7 +1,7 @@
 function getCredits() {
     return parseFloat(localStorage.getItem('credits')) || 0;
 }
-function calcCredits(operation, amount) {
+function calcCredits(amount, operation = '+') {
     let currentCredits = getCredits();
     if (operation === 'add' || operation === '+') {
         localStorage.setItem('credits', currentCredits + amount);
@@ -16,6 +16,14 @@ function calcCredits(operation, amount) {
     } else {
         return;
     }
+}
+
+function isPassAndPlayEnabled() {
+    return localStorage.getItem('passAndPlay') == 'true';
+}
+function togglePassAndPlay() {
+    let enabled = isPassAndPlayEnabled();
+    localStorage.setItem('passAndPlay', !enabled);
 }
 
 function isMuted() {
@@ -231,6 +239,121 @@ function unlockCasinoGame(game) {
     if (!unlockedGames.includes(game)) {
         unlockedGames.push(game);
         localStorage.setItem('unlockedCasinoGames', JSON.stringify(unlockedGames));
+    }
+}
+
+function getStoreBoughtItems() {
+    return JSON.parse(localStorage.getItem('storeBoughtItems')) || {
+        boardSizes: [],
+        gamemodes: [],
+        modifiers: [],
+        aiDifficulties: [],
+        themes: [],
+        iconPacks: [],
+        bundles: [],
+    };
+}
+function isStoreItemBought(category, itemKey) {
+    const bought = getStoreBoughtItems();
+    return Array.isArray(bought[category]) && bought[category].includes(itemKey);
+}
+function buyStoreItem(category, itemKey) {
+    const bought = getStoreBoughtItems();
+    if (!Array.isArray(bought[category])) {
+        bought[category] = [];
+    }
+    if (!bought[category].includes(itemKey)) {
+        bought[category].push(itemKey);
+        localStorage.setItem('storeBoughtItems', JSON.stringify(bought));
+    }
+}
+function getMultiplierUpgradeStats() {
+    return JSON.parse(localStorage.getItem('multiplierUpgradeStats')) || {
+        level: 0,
+        multiplier: 1.0,
+        price: 25,
+    };
+}
+function getStoreItemsAndPrices() {
+    return {
+        powerups: [
+            {name: "skip-ai", price: 1},
+            {name: "replace-card", price: 0.5},
+            {name: "view-next", price: 1.5},
+            {name: "undo-move", price: 2},
+            {name: "pick-card", price: 3},
+            {name: "double-credits", price: 10}
+        ],
+        boardSizes: [
+            {name: "3x3", price: 2.5},
+            {name: "7x7", price: 5},
+            {name: "8x8", price: 7.5},
+            {name: "9x9", price: 10},
+            {name: "10x10", price: 15}
+        ],
+        gamemodes: [
+            {name: "chain-reaction", price: 7.5},
+            {name: "reverse-rules", price: 10},
+            {name: "mirror-match", price: 15},
+            {name: "subtraction", price: 20},
+            {name: "ludicrously-lucky", price: 30},
+            {name: "fog-of-war", price: 50},
+            {name: "territorial", price: 50}
+        ],
+        modifiers: [
+            {name: "ai-first", price: 1},
+            {name: "no-bonus-points", price: 2.5},
+            {name: "no-powerups", price: 2.5},
+            {name: "maintained-paths", price: 7.5},
+        ],
+        aiDifficulties: [
+            {name: 0.2, price: 1},
+            {name: 0.3, price: 2},
+            {name: 0.7, price: 3},
+            {name: 0.8, price: 5},
+            {name: 0.9, price: 7.5}
+        ],
+        themes: [
+            {name: "fire", price: 2.5},
+            {name: "midnight", price: 5},
+            {name: "royal", price: 7.5},
+            {name: "lava", price: 12.5},
+            {name: "cosmic", price: 25},
+            {name: "seafoam", price: 50}
+        ],
+        iconPacks: [
+            {name: "emoji", price: 1},
+            {name: "roman", price: 2.5},
+            {name: "sci-fi", price: 5}
+        ],
+        bundles: [
+            {
+                name: "out-of-this-world",
+                themes: ["cosmic"],
+                iconPacks: ["sci-fi"],
+                modifiers: ["ai-first"],
+                boardSizes: ["8x8"],
+                price: 35,
+            },
+            {
+                name: "power-booster",
+                powerups: [
+                    {name: "skip-ai", quantity: 2},
+                    {name: "replace-card", quantity: 3},
+                    {name: "view-next", quantity: 2},
+                    {name: "undo-move", quantity: 2},
+                    {name: "pick-card", quantity: 1},
+                    {name: "double-credits", quantity: 1}
+                ],
+                price: 20
+            }
+        ],
+        multiplierUpgrade: {
+            name: "buy-multiplier-upgrade",
+            level: getMultiplierUpgradeStats().level,
+            multiplier: getMultiplierUpgradeStats().multiplier,
+            price: getMultiplierUpgradeStats().price
+        }
     }
 }
 

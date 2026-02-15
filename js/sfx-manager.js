@@ -12,6 +12,11 @@ sfxCheckbox.addEventListener('change', () => {
     toggleMuted();
 });
 
+let passAndPlayCheckbox = document.querySelector('.pass-and-play-toggle');
+passAndPlayCheckbox.addEventListener('change', () => {
+    togglePassAndPlay();
+});
+
 function playSound(sfx) {
     if (!isMuted()) {
         let sound = sfx.cloneNode();
@@ -25,5 +30,8 @@ function playSound(sfx) {
 window.onload = () => {
     if (isMuted()) {
         sfxCheckbox.checked = false;
+    }
+    if (isPassAndPlayEnabled()) {
+        passAndPlayCheckbox.checked = true;
     }
 }
