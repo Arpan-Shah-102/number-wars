@@ -357,6 +357,33 @@ function getStoreItemsAndPrices() {
     }
 }
 
+function getMultiplierAmounts() {
+    return {
+        "double-credits": 1.0,
+        "novice": -0.5,
+        "beginner": -0.25,
+        "skilled": 0.1,
+        "advanced": 0.2,
+        "expert": 0.3,
+        "pro": 0.4,
+        "master": 0.5,
+        "blitz": 1.5,
+        "sudden-death": 2.25,
+        "chain-reaction": -0.25,
+        "reverse-rule": 2.75,
+        "mirror-match": 0.4,
+        "subtraction": 0.5,
+        "ludicrously-lucky": 1.5,
+        "fog-of-war": 0.5,
+        "territorial": 0.6,
+        "helper-cells": -0.5,
+        "ai-first": 0.05,
+        "no-bonus-points": 0.2,
+        "no-powerups": 0.2,
+        "maintained-paths": -0.25,
+    }
+}
+
 function exportData() {}
 
 function importData() {}

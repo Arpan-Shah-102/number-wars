@@ -12,6 +12,10 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Nothing V1.67 - 2/15/2025
+1. Prepared Update for credits multiplier
+2. Added multiplier weights in utils
+
 ### Adding Functionality V1.65 - 2/14/2026
 1. Updated Store Customization
 2. Added Pass and Play Skeleton

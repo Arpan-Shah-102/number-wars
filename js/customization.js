@@ -248,16 +248,7 @@ shopItems.forEach(item => {
             if (meta && !meta.repeatable) {
                 buyStoreItem(meta.category, meta.key);
             }
-            updateStats();
-            updateThemeBtns();
-            updateIconPackBtns();
-            updateBoardSizeDropdown();
-            updateAIDifficultyDropdown();
-            updateGameModeDropdown();
-            updateModifierCheckboxes();
-            updateCasinoGames();
-            updatePowerupButtons();
-            updateShopItems();
+            initalizeCustomization();
             playSound(sfx.action);
         } else {
             alert("You don't have enough credits to buy this item.");
@@ -265,13 +256,20 @@ shopItems.forEach(item => {
     });
 });
 
-updateThemeBtns();
-updateIconPackBtns();
-updateBoardSizeDropdown();
-updateAIDifficultyDropdown();
-updateGameModeDropdown();
-updateModifierCheckboxes();
-updateShopItems();
+function updateCreditsMultiplierDisplay() {
+    console.log("Not ready yet.");
+}
 
-updateCasinoGames();
-updatePowerupButtons();
+function initalizeCustomization() {
+    updateThemeBtns();
+    updateIconPackBtns();
+    updateBoardSizeDropdown();
+    updateAIDifficultyDropdown();
+    updateGameModeDropdown();
+    updateModifierCheckboxes();
+    updateShopItems();
+    updateCreditsMultiplierDisplay();
+    updateCasinoGames();
+    updatePowerupButtons();
+}
+initalizeCustomization();
