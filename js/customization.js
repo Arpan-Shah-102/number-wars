@@ -96,6 +96,7 @@ function updateAIDifficultyDropdown() {
 changeAIDifficultyDropdown.addEventListener('change', () => {
     setAIDifficulty(changeAIDifficultyDropdown.value);
     playSound(sfx.action);
+    updateCreditsMultiplierDisplay();
 });
 
 let changeGameModeDropdown = document.querySelector('.gamemode-select');
@@ -117,6 +118,7 @@ function updateGameModeDropdown() {
 changeGameModeDropdown.addEventListener('change', () => {
     setGamemode(changeGameModeDropdown.value);
     playSound(sfx.action);
+    updateCreditsMultiplierDisplay();
 });
 
 let modifierCheckboxes = document.querySelectorAll('input.modifier');
@@ -150,6 +152,7 @@ modifierCheckboxes.forEach(checkbox => {
             removeActiveModifier(checkbox.value);
         }
         playSound(sfx.action);
+        updateCreditsMultiplierDisplay();
     });
 });
 
@@ -194,6 +197,7 @@ function updatePowerupButtons() {
             btn.classList.add('disabled');
             disabled = true;
         }
+        updateCreditsMultiplierDisplay();
     });
 }
 
@@ -256,8 +260,51 @@ shopItems.forEach(item => {
     });
 });
 
+let creditsMultiplierDisplay = document.querySelector('.multiplier-value');
+let creditsMultiplierExpanded = document.querySelector('.custom-multipliers');
+let totalMultiplierDisplay = document.querySelector('.total-multiplier p span');
 function updateCreditsMultiplierDisplay() {
-    console.log("Not ready yet.");
+    creditsMultiplierExpanded.innerHTML = '';
+    let multiplier = getMultiplierUpgradeStats().multiplier;
+    let multiplierAmounts = getMultiplierAmounts();
+
+    let aiDifficulty = getAIDificulty();
+    let gamemode = getGamemode();
+    let modifiers = getActiveModifiers();
+
+    for (let key in multiplierAmounts) {
+        if (key == getAIDificultyName()[aiDifficulty] || key == gamemode || modifiers.includes(key)) {
+            multiplier += multiplierAmounts[key];
+
+            let multiplierElement = document.createElement('div');
+            multiplierElement.classList.add('multiplier');
+            multiplierElement.classList.add(multiplierAmounts[key] > 0 ? 'positive' : 'negative');
+
+            let p1 = document.createElement('p');
+            if (key == getAIDificultyName()[aiDifficulty]) {
+                p1.textContent = `${formatText(key)} AI`;
+            } else if (key == gamemode) {
+                p1.textContent = `${formatText(key)} Gamemode`;
+            } else {
+                p1.textContent = `${formatText(key)} Modifier`;
+            }
+            let p2 = document.createElement('p');
+            p2.textContent = `${multiplierAmounts[key] > 0 ? '+' : ''}${multiplierAmounts[key]}`;
+            
+            multiplierElement.appendChild(p1);
+            multiplierElement.appendChild(p2);
+            creditsMultiplierExpanded.appendChild(multiplierElement);
+        }
+    }
+    creditsMultiplierDisplay.textContent = multiplier.toFixed(2);
+    totalMultiplierDisplay.textContent = `${multiplier.toFixed(2)}x`;
+    if (multiplier > 1) {
+        totalMultiplierDisplay.parentElement.parentElement.classList.add('positive');
+        totalMultiplierDisplay.parentElement.parentElement.classList.remove('negative');
+    } else if (multiplier < 1) {
+        totalMultiplierDisplay.parentElement.parentElement.classList.add('negative');
+        totalMultiplierDisplay.parentElement.parentElement.classList.remove('positive');
+    }
 }
 
 function initalizeCustomization() {

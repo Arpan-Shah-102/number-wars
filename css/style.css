@@ -734,6 +734,10 @@ main {
             align-items: center;
             flex-direction: column;
 
+            & .next-card {
+                margin: 4px 0 8px 0;
+                display: none; /* block */
+            }
             & .full-card {
                 position: relative;
                 width: 150px;
@@ -813,13 +817,17 @@ main {
                 & .multiplier, & .total-multiplier {
                     display: flex;
                     justify-content: space-between;
+                    align-items: center;
                     padding: 0px 12px;
+                    margin: 6px 0;
+                    text-align: left;
+                    line-height: 1.2;
 
                     &.positive * {
-                        color: rgb(64, 255, 64);
+                        color: rgb(96, 255, 96);
                     }
                     &.negative * {
-                        color: rgb(255, 64, 64);
+                        color: rgb(255, 96, 96);
                     }
                 }
             }

@@ -7,12 +7,19 @@ let cardDeck = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let currentCard = pullRandomCard();
 let nextCard = pullRandomCard(cardDeck, "next");
 
+let cardDisplay = document.querySelector('.current-card .card-num');
+let nextCardDisplay = document.querySelector('.next-card');
+
 function newGame() {
     gameOverPanel.classList.remove('load-in');
+    currentCard = pullRandomCard();
+    nextCard = pullRandomCard(cardDeck, "next");
     startGame();
 }
 function startGame() {
     createFullBoard();
+    cardDisplay.textContent = currentCard;
+    nextCardDisplay.textContent = `Next Card: ${nextCard}`;
 
     if (isPassAndPlayEnabled()) {
         alert("Pass and Play mode is not available yet. Please check back later for updates!");
@@ -62,3 +69,5 @@ function endGame(result, playerScore, aiScore, creditsEarned) {
     }
     gameOverPanel.classList.add('load-in');
 }
+
+startGame();

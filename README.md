@@ -12,6 +12,13 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Adding Functionality V1.7 - 12/16/2026
+1. Made Credits Multiplier Dynamic
+2. Added spot for next card (for when power up is used)
+3. Display current cards and next cards (hidden)
+4. New game created when switching gamemodes, ai difficulties, board sizes, modifiers, etc
+5. Bug Fixes
+
 ### Nothing V1.67 - 2/15/2025
 1. Prepared Update for credits multiplier
 2. Added multiplier weights in utils

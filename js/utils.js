@@ -147,6 +147,18 @@ function unlockAIDifficulty(difficulty) {
         localStorage.setItem('unlockedAIDifficulties', JSON.stringify(unlockedDifficulties));
     }
 }
+function getAIDificultyName() {
+    return {
+        0.2: "novice",
+        0.3: "beginner",
+        0.4: "intermediate",
+        0.5: "skilled",
+        0.6: "advanced",
+        0.7: "expert",
+        0.8: "pro",
+        0.9: "master"
+    }
+}
 
 function getPowerups() {
     return JSON.parse(localStorage.getItem('powerups')) || {"skip-ai": 1, "replace-card": 3, "view-next": 1, "undo-move": 1, "pick-card": 0, "double-credits": 0};
@@ -382,6 +394,10 @@ function getMultiplierAmounts() {
         "no-powerups": 0.2,
         "maintained-paths": -0.25,
     }
+}
+
+function formatText(text) {
+    return text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 function exportData() {}
