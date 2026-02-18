@@ -733,7 +733,11 @@ main {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-
+            transition: all 0.3s ease-in-out;
+            
+            &.opacity {
+                opacity: 0.5;
+            }
             & .next-card {
                 margin: 4px 0 8px 0;
                 display: none; /* block */
@@ -924,26 +928,26 @@ main {
             }
 
             &.occupied, &.red, &.green {
-                cursor: not-allowed;
+                cursor: default;
                 transform: none;
                 opacity: 1;
                 font-weight: bold;
                 font-size: 2rem;
             }
             &.occupied {
-                background-color: rgba(128, 128, 128, 0.3);
-                border-color: rgb(95, 95, 95);
-                box-shadow: inset 0px 0px 12px gray;
+                background-color: rgba(128, 128, 128, 0.3) !important;
+                border-color: rgb(95, 95, 95) !important;
+                box-shadow: inset 0px 0px 12px gray !important;
             }
             &.red {
-                background-color: rgba(220, 20, 60, 0.3);
-                border-color: darkred;
-                box-shadow: inset 0px 0px 12px crimson;
+                background-color: rgba(220, 20, 60, 0.3) !important;
+                border-color: darkred !important;
+                box-shadow: inset 0px 0px 12px crimson !important;
             }
             &.green {
-                background-color: rgba(50, 205, 50, 0.3);
-                border-color: darkgreen;
-                box-shadow: inset 0px 0px 12px limegreen;
+                background-color: rgba(50, 205, 50, 0.3) !important;
+                border-color: darkgreen !important;
+                box-shadow: inset 0px 0px 12px limegreen !important;
             }
             &.connection-part {
                 background-color: rgba(255, 217, 0, 0.3);

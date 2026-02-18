@@ -12,6 +12,21 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Adding Functionality V2.0 - 12/17/2026
+1. Added Placing Cells
+2. Added AI Placing Cells
+3. Added calculating points per turn
+4. Added game over functions
+5. Added gaining credits when game over
+6. Added a few statistics
+7. Added updating you and opponent scores
+8. Fixed new game function
+9. Added Sudden Death Mode
+10. Fixed credits gained without multiplier
+11. Added two pair for scoring
+12. Added add to 10 for scoring
+13. Bug Fixes
+
 ### Adding Functionality V1.7 - 12/16/2026
 1. Made Credits Multiplier Dynamic
 2. Added spot for next card (for when power up is used)
@@ -55,7 +70,7 @@ Use the items you got in the **store** in the **settings** and change up your ga
 4. Added sfx manager JS file
 5. Found & partially added sfx
 
-### The Foundations V1 - 2/10/2026
+### The Foundations V1.0 - 2/10/2026
 1. Finished New UI
 2. Created JS so that you can now open and close the menus
 3. Work from previous updates finally visible

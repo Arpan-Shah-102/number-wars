@@ -151,6 +151,16 @@ function attachCellEventListeners() {
     });
 }
 
+function isBoardFull() {
+    let counter = 0;
+    gameboardCells.forEach(cell => {
+        if (cell.classList.contains('empty')) {
+            counter++;
+        }
+    });
+    return counter == 0 ? true : false;
+}
+
 function createFullBoard(height = getGameboardSize()[0], width = getGameboardSize()[1]) {
     gameboardHeight = height;
     gameboardWidth = width;
