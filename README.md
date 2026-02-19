@@ -12,7 +12,19 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
-### Adding Functionality V2.0 - 12/17/2026
+### Adding Advanced Functionality V2.25 - 2/18/2026
+1. Added Bonus Points
+2. Added Bonus Points Animations
+3. Added AI Uprising Modfier
+4. Added No Bonus Points Modifier
+5. Added Maintained Paths modifier
+6. Shop Bug Fixes
+7. End Game Bug Fixes
+8. Finished Stats
+9. Major Bug Fixes
+10. Minor Bug Fixes
+
+### Adding Functionality V2.0 - 2/17/2026
 1. Added Placing Cells
 2. Added AI Placing Cells
 3. Added calculating points per turn
@@ -27,7 +39,7 @@ Use the items you got in the **store** in the **settings** and change up your ga
 12. Added add to 10 for scoring
 13. Bug Fixes
 
-### Adding Functionality V1.7 - 12/16/2026
+### Adding Functionality V1.7 - 2/16/2026
 1. Made Credits Multiplier Dynamic
 2. Added spot for next card (for when power up is used)
 3. Display current cards and next cards (hidden)

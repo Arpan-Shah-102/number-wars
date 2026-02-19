@@ -163,6 +163,10 @@ function updateStats() {
     normalStats.forEach(stat => {
         let key = stat.dataset.statKey;
         stat.querySelector(' h3').textContent = stats[key];
+
+        if (key === 'winRate') {
+            stat.querySelector(' h3').textContent = stats[key] + '%';
+        }
     });
     highScoreStats.forEach(stat => {
         let key = stat.dataset.statKey;
@@ -249,9 +253,60 @@ shopItems.forEach(item => {
         const meta = getShopItemMeta(button);
 
         if (price <= getCredits()) {
-            if (meta && !meta.repeatable) {
-                buyStoreItem(meta.category, meta.key);
+            calcCredits(price, '-');
+
+            if (meta) {
+                if (!meta.repeatable) {
+                    buyStoreItem(meta.category, meta.key);
+                }
+
+                // Actually unlock the item
+                switch (meta.category) {
+                    case 'boardSizes':
+                        let [h, w] = meta.key.split('x').map(Number);
+                        unlockGameboardSize([h, w]);
+                        break;
+                    case 'gamemodes':
+                        unlockGamemode(meta.key);
+                        break;
+                    case 'modifiers':
+                        unlockModifier(meta.key);
+                        break;
+                    case 'aiDifficulties':
+                        unlockAIDifficulty(parseFloat(meta.key));
+                        break;
+                    case 'themes':
+                        unlockTheme(meta.key);
+                        break;
+                    case 'iconPacks':
+                        unlockIconPack(meta.key);
+                        break;
+                    case 'powerups':
+                        addPowerup(meta.key, 1);
+                        break;
+                    case 'bundles':
+                        let bundleData = getStoreItemsAndPrices().bundles.find(b => b.name === meta.key);
+                        if (bundleData) {
+                            if (bundleData.themes) bundleData.themes.forEach(t => unlockTheme(t));
+                            if (bundleData.iconPacks) bundleData.iconPacks.forEach(ip => unlockIconPack(ip));
+                            if (bundleData.modifiers) bundleData.modifiers.forEach(m => unlockModifier(m));
+                            if (bundleData.boardSizes) bundleData.boardSizes.forEach(s => {
+                                let [bh, bw] = s.split('x').map(Number);
+                                unlockGameboardSize([bh, bw]);
+                            });
+                            if (bundleData.powerups) bundleData.powerups.forEach(p => addPowerup(p.name, p.quantity));
+                        }
+                        break;
+                    case 'multiplierUpgrade':
+                        let upgradeStats = getMultiplierUpgradeStats();
+                        upgradeStats.level += 1;
+                        upgradeStats.multiplier += 0.1;
+                        upgradeStats.price = Math.round(upgradeStats.price * 1.5);
+                        localStorage.setItem('multiplierUpgradeStats', JSON.stringify(upgradeStats));
+                        break;
+                }
             }
+
             initalizeCustomization();
             playSound(sfx.action);
         } else {
@@ -307,6 +362,14 @@ function updateCreditsMultiplierDisplay() {
     }
 }
 
+let allCreditsDisplays = document.querySelectorAll('.credits-display');
+function updateTotalPointDisplays() {
+    let credits = getCredits();
+    allCreditsDisplays.forEach(display => {
+        display.textContent = credits.toFixed(1);
+    });
+}
+
 function initalizeCustomization() {
     updateThemeBtns();
     updateIconPackBtns();
@@ -318,5 +381,6 @@ function initalizeCustomization() {
     updateCreditsMultiplierDisplay();
     updateCasinoGames();
     updatePowerupButtons();
+    updateTotalPointDisplays();
 }
 initalizeCustomization();

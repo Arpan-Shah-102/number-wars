@@ -26,7 +26,10 @@ function generateConnectionsList(height = gameboardHeight, width = gameboardWidt
                 if (!consideredConnections.has(pairKey)) {
                     consideredConnections.add(pairKey);
 
-                    if (Math.random() < connectionChance) {
+                    if (!getActiveModifiers().includes('maintained-paths') && Math.random() < connectionChance) {
+                        gameboardConnections[currentCell].push(rightCell);
+                        gameboardConnections[rightCell].push(currentCell);
+                    } else if (getActiveModifiers().includes('maintained-paths')) {
                         gameboardConnections[currentCell].push(rightCell);
                         gameboardConnections[rightCell].push(currentCell);
                     }
@@ -39,7 +42,10 @@ function generateConnectionsList(height = gameboardHeight, width = gameboardWidt
                 if (!consideredConnections.has(pairKey)) {
                     consideredConnections.add(pairKey);
 
-                    if (Math.random() < connectionChance) {
+                    if (!getActiveModifiers().includes('maintained-paths') && Math.random() < connectionChance) {
+                        gameboardConnections[currentCell].push(downCell);
+                        gameboardConnections[downCell].push(currentCell);
+                    } else if (getActiveModifiers().includes('maintained-paths')) {
                         gameboardConnections[currentCell].push(downCell);
                         gameboardConnections[downCell].push(currentCell);
                     }

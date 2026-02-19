@@ -3,6 +3,7 @@ function getCredits() {
 }
 function calcCredits(amount, operation = '+') {
     let currentCredits = getCredits();
+    amount = parseFloat(amount);
     if (operation === 'add' || operation === '+') {
         localStorage.setItem('credits', currentCredits + amount);
     } else if (operation === 'subtract' || operation === '-') {
@@ -214,7 +215,7 @@ function getStats() {
         }
     }
 }
-function updateStats(stat, amount, operation = 'add') {
+function updateStatsData(stat, amount, operation = 'add') {
     let stats = getStats();
     if (stats[stat] !== undefined) {
         if (operation === 'add') {
@@ -227,7 +228,27 @@ function updateStats(stat, amount, operation = 'add') {
             stats[stat] = 0;
         }
         localStorage.setItem('stats', JSON.stringify(stats));
+    } else if (stats.highScores[stat] !== undefined) {
+        if (operation === 'add') {
+            stats.highScores[stat] += amount;
+        } else if (operation === 'subtract') {
+            stats.highScores[stat] -= amount;
+        } else if (operation === 'set') {
+            stats.highScores[stat] = amount;
+        } else if (operation === 'reset') {
+            stats.highScores[stat] = 0;
+        }
+        localStorage.setItem('stats', JSON.stringify(stats));
     }
+}
+function calculateWinRate() {
+    let stats = getStats();
+    if (stats.gamesPlayed > 0) {
+        stats.winRate = ((stats.wins / stats.gamesPlayed) * 100).toFixed(0);
+    } else {
+        stats.winRate = 0;
+    }
+    return stats.winRate;
 }
 
 function getUnlockedCasinoGames() {

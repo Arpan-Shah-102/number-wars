@@ -1,4 +1,5 @@
 let playerTurnActive = true;
+let isFirstTurn = true;
 let score = {
     player: 0,
     ai: 0
@@ -19,6 +20,7 @@ function newGame() {
     currentCard = pullRandomCard();
     nextCard = pullRandomCard(cardDeck, "next");
     terminal.textContent = "New game started!";
+    isFirstTurn = true;
     score.ai = 0;
     score.player = 0;
     playerPointsLabel.textContent = score.player;
@@ -30,6 +32,7 @@ function startGame() {
     cardDisplay.textContent = currentCard;
     nextCardDisplay.textContent = `Next Card: ${nextCard}`;
     addCellClickListener();
+    if (getActiveModifiers().includes('ai-first')) {playerTurnActive = false;}
 
     if (isPassAndPlayEnabled()) {
         alert("Pass and Play mode is not available yet. Please check back later for updates!");
@@ -46,7 +49,7 @@ function pullRandomCard(cardDeckList = cardDeck, cardNum = "current") {
     }
 }
 function shuffleCards() {
-    currentCard = pullRandomCard();
+    currentCard = nextCard;
     nextCard = pullRandomCard(cardDeck, "next");
     cardDisplay.textContent = currentCard;
     nextCardDisplay.textContent = `Next Card: ${nextCard}`;
@@ -54,7 +57,9 @@ function shuffleCards() {
 
 function AITurn() {
     playerTurnActive = true;
+    removeCellClickListener();
     makeAIMove((cell) => {
+        addCellClickListener();
         calculatePoints(cell, 'ai');
         nextTurn();
     });
@@ -62,13 +67,15 @@ function AITurn() {
 function nextTurn() {
     setTimeout(() => {
         if (isBoardFull() || (getGamemode() == 'sudden-death' && (score.player >= 10 || score.ai >= 10))) {
-            if (score.player > score.ai) {
-                endGame('win', score.player, score.ai, (score.player * parseFloat(creditsMultiplierDisplay.textContent)));
-            } else if (score.player < score.ai) {
-                endGame('lose', score.player, score.ai, 0);
-            } else {
-                endGame('tie', score.player, score.ai, 0);
-            }
+            addBonusPoints(() => {
+                if (score.player > score.ai) {
+                    endGame('win', score.player, score.ai, Math.round(score.player * getCredits() * 0.1).toFixed(1));
+                } else if (score.player < score.ai) {
+                    endGame('lose', score.player, score.ai, 0);
+                } else {
+                    endGame('tie', score.player, score.ai, 0);
+                }
+            });
         } else if (!playerTurnActive) {
             cardDisplay.parentElement.parentElement.classList.add('opacity');
             shuffleCards();
@@ -80,20 +87,21 @@ function nextTurn() {
 }
 
 function makeAIMove(callback, chance = getAIDificulty()) {
+    let aiCard = pullRandomCard();
+    let timeoutDuration = isFirstTurn && getActiveModifiers().includes('ai-first') ? 100 : 1250 + ((Math.random() * 500) - 250);
+    isFirstTurn = false;
     // Placeholder AI logic: Random move with chance influenced by difficulty
     // if (Math.random() < chance) {
 
     // }
     cellIndex = Math.floor(Math.random() * gameboardCells.length);
-    let aiCard = pullRandomCard();
-    let timeoutDuration = 1250 + ((Math.random() * 500) - 250);
     while (!gameboardCells[cellIndex].classList.contains('empty')) {
         cellIndex = Math.floor(Math.random() * gameboardCells.length);
     }
     setTimeout(() => {
         fillCell(cellIndex, aiCard);
         if (callback) callback(cellIndex);
-    }, 1000);
+    }, timeoutDuration);
 }
 function calculatePoints(cell, side = 'player') {
     let pointsEarned = findPoints(cell, 0);
@@ -113,6 +121,56 @@ function calculatePoints(cell, side = 'player') {
             playSound(sfx.mediumAction);
         }, 300);
     }
+}
+function addBonusPoints(callback) {
+    let playerCells = document.querySelectorAll('.map-cell.green');
+    let aiCells = document.querySelectorAll('.map-cell.red');
+    let playerBonus = 0;
+    let aiBonus = 0;
+    if (!getActiveModifiers().includes('no-bonus-points')) {
+        playerCells.forEach((cell, index) => {
+            playerBonus++;
+            setTimeout(() => {
+                cell.classList.add('bonus-point');
+                setTimeout(() => {cell.classList.remove('bonus-point');}, 250);
+            }, 100 * index);
+        });
+        setTimeout(() => {
+            aiCells.forEach((cell, index) => {
+                aiBonus++;
+                setTimeout(() => {
+                    cell.classList.add('bonus-point');
+                    setTimeout(() => {cell.classList.remove('bonus-point');}, 250);
+                }, 100 * index);
+            });
+        }, 100 * playerCells.length);
+    }
+    setTimeout(() => {
+        score.player += playerBonus;
+        score.ai += aiBonus;
+        playerPointsLabel.textContent = score.player;
+        aiPointsLabel.textContent = score.ai;
+
+        if (score.player > score.ai) {
+            gameboard.classList.add('green-fade');
+            setTimeout(() => {
+                gameboard.classList.remove('green-fade');
+            }, 750);
+        } else if (score.player < score.ai) {
+            gameboard.classList.add('red-fade');
+            setTimeout(() => {
+                gameboard.classList.remove('red-fade');
+            }, 750);
+        } else if (score.player === score.ai) {
+            gameboard.classList.add('yellow-fade');
+            setTimeout(() => {
+                gameboard.classList.remove('yellow-fade');
+            }, 750);
+        }
+        if (callback) {
+            setTimeout(callback, 750);
+        }
+    }, 100 * (playerCells.length + aiCells.length) + 500);
 }
 function findPoints(cell, points, side = playerTurnActive ? 'player' : 'ai') {
     let cellColumn = cell % gameboardWidth;
@@ -143,45 +201,74 @@ function endGame(result, playerScore, aiScore, creditsEarned) {
     gameOverPanel.classList.remove('win', 'lose', 'tie');
     gameOverPanel.querySelector('.final-your-score').textContent = `Your Score: ${playerScore}`;
     gameOverPanel.querySelector('.final-ai-score').textContent = `AI Score: ${aiScore}`;
-    updateStats(gamesPlayed, 1);
+    updateStatsData('gamesPlayed', 1);
     calcCredits(creditsEarned);
+    updateTotalPointDisplays();
+
     if (result === 'win') {
         playSound(sfx.win);
         gameOverPanel.querySelector('h2').textContent = "You Win!";
         gameOverPanel.classList.add('win');
         gameOverPanel.querySelector('.credits-result').textContent = `Credits Earned: ${creditsEarned}`;
-        updateStats(wins, 1);
-        updateStats(currentWinStreak, 1);
+        updateStatsData('wins', 1);
+        updateStatsData('currentWinStreak', 1);
         if (getStats().currentWinStreak > getStats().highestWinStreak) {
-            updateStats(highestWinStreak, 1);
+            updateStatsData('highestWinStreak', 1);
         }
     } else if (result === 'lose') {
         playSound(sfx.lose);
         gameOverPanel.querySelector('h2').textContent = "You Lose!";
         gameOverPanel.classList.add('lose');
-        updateStats(losses, 1);
-        updateStats(currentWinStreak, 0, 'set');
+        updateStatsData('losses', 1);
+        updateStatsData('currentWinStreak', 0, 'set');
     } else {
         playSound(sfx.lose);
         gameOverPanel.querySelector('h2').textContent = "It's a Tie!";
         gameOverPanel.classList.add('tie');
-        updateStats(ties, 1);
-        updateStats(currentWinStreak, 0, 'set');
+        updateStatsData('ties', 1);
+        updateStatsData('currentWinStreak', 0, 'set');
     }
+
     gameOverPanel.classList.add('load-in');
+    updateStatsData('winRate', calculateWinRate(), 'set');
+    if (getStats().highScores.overall < playerScore) {updateStatsData('overall', playerScore, 'set');}
+    if (getStats().highScores.classic < playerScore && getGamemode() === 'classic') {updateStatsData('classic', playerScore, 'set');}
+    if (getStats().highScores.blitz < playerScore && getGamemode() === 'blitz') {updateStatsData('blitz', playerScore, 'set');}
+    if (getStats().highScores.suddenDeath < playerScore && getGamemode() === 'sudden-death') {updateStatsData('suddenDeath', playerScore, 'set');}
+    if (getStats().highScores.chainReaction < playerScore && getGamemode() === 'chain-reaction') {updateStatsData('chainReaction', playerScore, 'set');}
+    if (getStats().highScores.reverseRules < playerScore && getGamemode() === 'reverse-rules') {updateStatsData('reverseRules', playerScore, 'set');}
+    if (getStats().highScores.mirrorMatch < playerScore && getGamemode() === 'mirror-match') {updateStatsData('mirrorMatch', playerScore, 'set');}
+    if (getStats().highScores.subtraction < playerScore && getGamemode() === 'subtraction') {updateStatsData('subtraction', playerScore, 'set');}
+    if (getStats().highScores.ludicrouslyLucky < playerScore && getGamemode() === 'ludicrously-lucky') {updateStatsData('ludicrouslyLucky', playerScore, 'set');}
+    if (getStats().highScores.forOfWar < playerScore && getGamemode() === 'for-of-war') {updateStatsData('forOfWar', playerScore, 'set');}
+    if (getStats().highScores.territorial < playerScore && getGamemode() === 'territorial') {updateStatsData('territorial', playerScore, 'set');}
+    updateStats();
+    updateShopItems();
 }
 
+function handleCellClick(cell, index) {
+    if (playerTurnActive && cell.classList.contains('empty')) {
+        fillCell(index, currentCard);
+        playerTurnActive = false;
+        calculatePoints(index);
+        nextTurn();
+    }
+}
+let cellClickHandlers = new Map();
 function addCellClickListener() {
     gameboardCells.forEach((cell, index) => {
-        cell.addEventListener('click', () => {
-            if (playerTurnActive && cell.classList.contains('empty')) {
-                fillCell(index, currentCard);
-                // Update player score if needed
-                playerTurnActive = false;
-                calculatePoints(index);
-                nextTurn();
-            }
-        });
+        const handler = () => handleCellClick(cell, index);
+        cellClickHandlers.set(index, handler);
+        cell.addEventListener('click', handler);
+    });
+}
+function removeCellClickListener() {
+    gameboardCells.forEach((cell, index) => {
+        const handler = cellClickHandlers.get(index);
+        if (handler) {
+            cell.removeEventListener('click', handler);
+            cellClickHandlers.delete(index);
+        }
     });
 }
 function fillCell(cell, value) {
