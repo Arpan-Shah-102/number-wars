@@ -12,6 +12,10 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Minor Bug Fix V 2.3 - 2/19/2026
+1. Fixed Credits Bug
+2. Fixed AI Difficulty label bug
+
 ### Adding Advanced Functionality V2.25 - 2/18/2026
 1. Added Bonus Points
 2. Added Bonus Points Animations

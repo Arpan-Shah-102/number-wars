@@ -69,7 +69,7 @@ function nextTurn() {
         if (isBoardFull() || (getGamemode() == 'sudden-death' && (score.player >= 10 || score.ai >= 10))) {
             addBonusPoints(() => {
                 if (score.player > score.ai) {
-                    endGame('win', score.player, score.ai, Math.round(score.player * getCredits() * 0.1).toFixed(1));
+                    endGame('win', score.player, score.ai, Math.round(score.player * 0.1).toFixed(1));
                 } else if (score.player < score.ai) {
                     endGame('lose', score.player, score.ai, 0);
                 } else {

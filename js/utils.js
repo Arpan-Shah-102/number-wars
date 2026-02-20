@@ -133,7 +133,7 @@ function unlockGameboardSize(size) {
 }
 
 function getAIDificulty() {
-    return localStorage.getItem('aiDifficulty') || "intermediate";
+    return localStorage.getItem('aiDifficulty') || 0.4;
 }
 function setAIDifficulty(difficulty) {
     localStorage.setItem('aiDifficulty', difficulty);
