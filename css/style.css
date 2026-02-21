@@ -1004,3 +1004,33 @@ main {
         transform: rotate(720deg) scale(0.1);
     }
 }
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes grow-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    20% {
+        transform: scale(1.2) translateY(-8px);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(1.3) translateY(-16px);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1) translateY(-20px);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1) translateY(-40px);
+        opacity: 0.5;
+    }
+}

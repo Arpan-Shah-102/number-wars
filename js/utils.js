@@ -190,6 +190,20 @@ function removePowerup(powerup) {
         localStorage.setItem('powerups', JSON.stringify(powerups));
     }
 }
+function canAcivatePowerup(powerup) {
+    let powerups = getPowerups();
+    return powerups[powerup] && powerups[powerup] > 0;
+}
+function powerUpsActivateable() {
+    return [
+        true,
+        true,
+        true,
+        true,
+        canAcivatePowerup("pick-card"),
+        canAcivatePowerup("double-credits")
+    ]
+}
 
 function getStats() {
     return JSON.parse(localStorage.getItem('stats')) || {

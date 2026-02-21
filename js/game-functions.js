@@ -94,9 +94,16 @@ function makeAIMove(callback, chance = getAIDificulty()) {
     // if (Math.random() < chance) {
 
     // }
-    cellIndex = Math.floor(Math.random() * gameboardCells.length);
-    while (!gameboardCells[cellIndex].classList.contains('empty')) {
+    if (Math.random() < getAIDificulty()) {
         cellIndex = Math.floor(Math.random() * gameboardCells.length);
+        while (!gameboardCells[cellIndex].classList.contains('empty')) {
+            cellIndex = Math.floor(Math.random() * gameboardCells.length);
+        }
+    } else {
+        cellIndex = Math.floor(Math.random() * gameboardCells.length);
+        while (!gameboardCells[cellIndex].classList.contains('empty')) {
+            cellIndex = Math.floor(Math.random() * gameboardCells.length);
+        }
     }
     setTimeout(() => {
         fillCell(cellIndex, aiCard);
@@ -284,3 +291,23 @@ function changeCell(cell, newClass) {
 }
 
 startGame();
+
+
+function replaceCardActivate() {
+
+}
+function skipAITurnActivate() {
+
+}
+function viewNextCardActivate() {
+
+}
+function undoMoveActivate() {
+
+}
+function pickCardActivate() {
+
+}
+function doubleCreditsActivate() {
+
+}

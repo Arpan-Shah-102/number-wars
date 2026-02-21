@@ -12,7 +12,13 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
-### Minor Bug Fix V 2.3 - 2/19/2026
+### Minor Bug Fixes V2.35 - 2/20/2026
+1. Improved Cell Scaling
+2. Created documentation for functions
+3. Prepared AI Difficulty Update
+4. Minor bug fixes
+
+### Minor Bug Fix V2.3 - 2/19/2026
 1. Fixed Credits Bug
 2. Fixed AI Difficulty label bug
 

@@ -91,10 +91,20 @@
 .grid-5x9 {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-5x10 {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 
 .grid-6x3 {
@@ -124,10 +134,20 @@
 .grid-6x9 {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-6x10 {
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 
 .grid-7x3 {
@@ -157,10 +177,20 @@
 .grid-7x9 {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-7x10 {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 
 .grid-8x3 {
@@ -186,14 +216,29 @@
 .grid-8x8 {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-8x9 {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-8x10 {
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 
 .grid-9x3 {
@@ -215,18 +260,38 @@
 .grid-9x7 {
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(7, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-9x8 {
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-9x9 {
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-9x10 {
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 
 .grid-10x3 {
@@ -248,16 +313,36 @@
 .grid-10x7 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(7, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-10x8 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-10x9 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(9, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }
 .grid-10x10 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    gap: 6px !important;
+
+    & .occupied {
+        font-size: 1.75rem !important;
+    }
 }

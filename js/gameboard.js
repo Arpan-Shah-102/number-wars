@@ -60,19 +60,20 @@ let boardPixelWidth = gameboard.offsetWidth;
 let connectionLineMap = new Map();
 
 function generateConnections() {
-    let cellWidth = (boardPixelWidth - 20) / gameboardWidth;
-    let cellHeight = (boardPixelHeight - 20) / gameboardHeight;
+    const gameboardRect = gameboard.getBoundingClientRect();
+    const paddingLeft = 10;
+    const paddingTop = 10;
 
     const cellPositions = {};
-    for (let row = 0; row < gameboardHeight; row++) {
-        for (let col = 0; col < gameboardWidth; col++) {
-            const cellKey = `${row},${col}`;
-            cellPositions[cellKey] = {
-                x: (col * cellWidth) + (cellWidth / 2),
-                y: (row * cellHeight) + (cellHeight / 2)
-            };
-        }
-    }
+    gameboardCells.forEach((cell, index) => {
+        const row = Math.floor(index / gameboardWidth);
+        const col = index % gameboardWidth;
+        const cellRect = cell.getBoundingClientRect();
+        cellPositions[`${row},${col}`] = {
+            x: cellRect.left - gameboardRect.left - paddingLeft + cellRect.width / 2,
+            y: cellRect.top - gameboardRect.top - paddingTop + cellRect.height / 2
+        };
+    });
 
     connectionLayer.innerHTML = '';
     connectionLineMap.clear();
