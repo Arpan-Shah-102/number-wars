@@ -75,27 +75,32 @@ Checks if the board is full or sudden-death conditions are met. If so, calls `ad
 
 ### makeAIMove(callback, chance)
 Picks a random empty cell and places the AI's card after a delay.
-- Delay is ~0ms on the first turn with `ai-first` modifier, otherwise ~1250ms ± 250ms
+- Delay is ~100ms on the first turn with `ai-first` modifier, otherwise ~1250ms ± 250ms
 - **Parameters:** `callback` - Called with the cell index after the move
 
 ### calculatePoints(cell, side)
-Calls `findPoints()` and adds the result to the appropriate score. Updates the terminal message and score display.
+Calls `findPoints()` and adds the result to the appropriate score. Updates the terminal message, score display, and triggers sound effects and score popups if points were earned.
 - **Parameters:** `cell` - Cell index, `side` - `'player'` or `'ai'`
 
 ### addBonusPoints(callback)
 Animates bonus point cells with a scale pulse, then adds one bonus point per colored cell to each player's score. Triggers a gameboard color flash based on who is winning. Calls `callback` after completion.
 
 ### findPoints(cell, points, side)
-Checks all connections for the placed cell. Awards 1 point for matching values, 2 points for values summing to 10. Changes connected cells to the appropriate color.
-- **Parameters:** `cell` - Cell index, `points` - Starting point total, `side` - `'player'` or `'ai'`
-- **Returns:** `number` - Total points earned
+Scores the placed cell by checking three conditions against all connected occupied neighbors:
+1. **Matching value** — awards 1 point if a connected cell has the same value
+2. **Add to ten** — awards 2 points if a connected cell's value sums to 10 with the placed cell
+3. **Sequence** — walks the connection graph in both ascending and descending directions (with 0–9 wrapping, e.g. `9→0→1`) using recursive DFS with backtracking to find the longest consecutive chain passing through the placed cell. Awards points equal to the full sequence length if it is 3 or more cells long.
+
+All scored cells are colored at the end: green for player, red for AI.
+- **Parameters:** `cell` - Cell index, `points` - Starting point total (usually `0`), `side` - `'player'` or `'ai'`
+- **Returns:** `number` - Total points earned this turn
 
 ### endGame(result, playerScore, aiScore, creditsEarned)
 Handles end-of-game logic: updates stats, awards credits, updates high scores, and shows the game over panel.
 - **Parameters:** `result` - `'win'`, `'lose'`, or `'tie'`
 
 ### handleCellClick(cell, index)
-Called when a player clicks a cell. Only acts if it's the player's turn and the cell is empty.
+Called when a player clicks a cell. Only acts if it's the player's turn and the cell is empty. Places the current card, disables the player turn flag, calculates points, and calls `nextTurn()`.
 
 ### addCellClickListener()
 Attaches click handlers to all gameboard cells using a `Map` to store references for later removal.
@@ -103,11 +108,31 @@ Attaches click handlers to all gameboard cells using a `Map` to store references
 ### removeCellClickListener()
 Removes all stored click handlers from gameboard cells and clears the handler map.
 
-### fillCell(cell, value)
-Marks a cell as occupied, sets its text content and `data-value` to the given value.
+### fillCell(cell, value, side)
+Marks a cell as occupied, sets its text content and `data-value` to the given value, triggers a placing animation, and shows a mini card popup for the appropriate side.
+- **Parameters:** `cell` - Cell index, `value` - Card value to place, `side` - `'player'` or `'ai'`
 
 ### changeCell(cell, newClass)
-Replaces a cell's class list with `map-cell` + the given class (e.g. `'green'`, `'red'`).
+Replaces a cell's class list with `map-cell` + the given class (e.g. `'green'`, `'red'`) and triggers a placing animation.
+- **Parameters:** `cell` - Cell index, `newClass` - CSS class string to apply
+
+### replaceCardActivate()
+*(Not yet implemented)* Will replace the current card with a new one.
+
+### skipAITurnActivate()
+*(Not yet implemented)* Will skip the AI's next turn.
+
+### viewNextCardActivate()
+*(Not yet implemented)* Will reveal the next card to the player.
+
+### undoMoveActivate()
+*(Not yet implemented)* Will undo the player's last move.
+
+### pickCardActivate()
+*(Not yet implemented)* Will allow the player to pick their card value.
+
+### doubleCreditsActivate()
+*(Not yet implemented)* Will double credits earned for the current game.
 
 ---
 
@@ -174,25 +199,7 @@ Manages powerup button click handling and activation.
 
 ### powerupFunctions
 Array mapping powerup button indices to their activation functions:
-`[replaceCardActivate, skipAITurnActivate, viewNextCardActivate, undoMoveActivate, pickCardActivate, doubleCreditsActivate]`
-
-### replaceCardActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will replace the current card with a new one.
-
-### skipAITurnActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will skip the AI's next turn.
-
-### viewNextCardActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will reveal the next card to the player.
-
-### undoMoveActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will undo the player's last move.
-
-### pickCardActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will allow the player to pick their card value.
-
-### doubleCreditsActivate() *(in game-functions.js)*
-*(Not yet implemented)* Will double credits earned for the current game.
+`[skipAITurnActivate, replaceCardActivate, viewNextCardActivate, undoMoveActivate, pickCardActivate, doubleCreditsActivate]`
 
 ---
 
@@ -300,6 +307,14 @@ Manages localStorage data access, game settings, stats, store items, and utility
 | `getMultiplierUpgradeStats()` | Returns `{ level, multiplier, price }` for the multiplier upgrade |
 | `getStoreItemsAndPrices()` | Returns full store catalog with names and prices |
 | `getMultiplierAmounts()` | Returns map of modifier/gamemode/difficulty keys to their multiplier effect values |
+
+### Casino
+| Function | Description |
+|---|---|
+| `getUnlockedCasinoGames()` | Returns array of unlocked casino game strings |
+| `getAllCasinoGames()` | Returns array of all casino game strings |
+| `getCasinoGamePrices()` | Returns map of casino game names to their unlock prices |
+| `unlockCasinoGame(game)` | Adds a casino game to the unlocked list |
 
 ### Misc
 | Function | Description |

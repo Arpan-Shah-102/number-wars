@@ -21,13 +21,16 @@
         <main>
             <section class="right pannel side-pannel">
                 <div class="scores">
+                    <div class="floating-indicator player">+0</div>
                     <div class="score-div player">
                         <h3>You 🟢</h3>
                         <p class="player-score score">0</p>
                     </div>
+                    <div class="floating-indicator ai">+0</div>
                     <div class="score-div computer">
                         <h3>Opponent 🔴</h3>
                         <p class="computer-score score">0</p>
+                        <div class="mini-card ai">0</div>
                     </div>
                 </div>
                 <div class="settings">
@@ -79,6 +82,7 @@
                         <div class="card-num">0</div>
                         <div class="card-display"></div>
                     </div>
+                    <div class="mini-card player">0</div>
                     <h4 class="next-card">Next Card: 0</h4>
                 </div>
                 <div class="multiplier-display">
@@ -678,12 +682,12 @@
             <div>
                 <h2>⚡ Power-ups ⚡</h2>
                 <hr>
-                <button data-powerup-name="skip-ai" class="powerup skip-ai"><p>⏩ Skip AI Turn</p><p class="remaining">1</p></button>
-                <button data-powerup-name="replace-card" class="powerup replace-card"><p>🔄 Replace Card</p><p class="remaining">3</p></button>
-                <button data-powerup-name="view-next" class="powerup view-next"><p>👁️ View Next Card</p><p class="remaining">1</p></button>
-                <button data-powerup-name="undo-move" class="powerup disabled undo-move"><p>↩️ Undo Move</p><p class="remaining">1</p></button>
-                <button disabled data-powerup-name="pick-card" class="powerup disabled pick-card"><p>🃏 Pick Card</p><p class="remaining">0</p></button>
-                <button disabled data-powerup-name="double-credits" class="powerup disabled double-credits"><p>💰 Double Credits for Round</p><p class="remaining">0</p></button>
+                <button data-powerup-name="skip-ai" class="powerup activate-menu skip-ai"><p>⏩ Skip AI Turn</p><p class="remaining">1</p></button>
+                <button data-powerup-name="replace-card" class="powerup activate-menu replace-card"><p>🔄 Replace Card</p><p class="remaining">3</p></button>
+                <button data-powerup-name="view-next" class="powerup activate-menu view-next"><p>👁️ View Next Card</p><p class="remaining">1</p></button>
+                <button data-powerup-name="undo-move" class="powerup activate-menu disabled undo-move"><p>↩️ Undo Move</p><p class="remaining">1</p></button>
+                <button disabled data-powerup-name="pick-card" class="powerup activate-menu disabled pick-card"><p>🃏 Pick Card</p><p class="remaining">0</p></button>
+                <button disabled data-powerup-name="double-credits" class="powerup activate-menu disabled double-credits"><p>💰 Double Credits for Round</p><p class="remaining">0</p></button>
                 <hr>
                 <button class="close">❌ Close</button>
             </div>
@@ -712,8 +716,8 @@
         <script src="./js/menus.js"></script>
         <script src="./js/customization.js"></script>
         <script src="./js/gameboard.js"></script>
-        <script src="./js/powerups.js"></script>
         <script src="./js/game-functions.js"></script>
+        <script src="./js/powerups.js"></script>
         <script src="./js/main.js"></script>
     </body>
 </html>

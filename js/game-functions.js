@@ -6,7 +6,8 @@ let score = {
 }
 let cardDeck = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let currentCard = pullRandomCard();
-let nextCard = pullRandomCard(cardDeck, "next");
+let modifiedCardDeck = [...cardDeck.filter(card => card !== currentCard)];
+let nextCard = pullRandomCard(modifiedCardDeck, "next");
 
 let cardDisplay = document.querySelector('.current-card .card-num');
 let nextCardDisplay = document.querySelector('.next-card');
@@ -21,6 +22,7 @@ function newGame() {
     nextCard = pullRandomCard(cardDeck, "next");
     terminal.textContent = "New game started!";
     isFirstTurn = true;
+    playerTurnActive = true;
     score.ai = 0;
     score.player = 0;
     playerPointsLabel.textContent = score.player;
@@ -45,14 +47,33 @@ function pullRandomCard(cardDeckList = cardDeck, cardNum = "current") {
     if (cardNum === "current") {
         return cardDeckList[Math.floor(Math.random() * cardDeckList.length)];
     } else if (cardNum === "next") {
-        return cardDeckList.filter(card => card !== currentCard)[Math.floor(Math.random() * cardDeckList.length)];
+        return cardDeckList[Math.floor(Math.random() * cardDeckList.length)];
     }
 }
 function shuffleCards() {
     currentCard = nextCard;
-    nextCard = pullRandomCard(cardDeck, "next");
+    modifiedCardDeck = [...cardDeck.filter(card => card !== currentCard)];
+    nextCard = pullRandomCard(modifiedCardDeck, "next");
     cardDisplay.textContent = currentCard;
     nextCardDisplay.textContent = `Next Card: ${nextCard}`;
+}
+let scorePopups = document.querySelectorAll('.floating-indicator');
+function scorePopup(points, side = 'player') {
+    let popup = side === 'player' ? scorePopups[0] : scorePopups[1];
+    popup.textContent = `+${points}`;
+    popup.classList.add('shown');
+    setTimeout(() => {
+        popup.classList.remove('shown');
+    }, 1000);
+}
+let miniPopups = document.querySelectorAll('.mini-card');
+function miniCardPopup(card, side = 'player') {
+    let popup = side === 'player' ? miniPopups[1] : miniPopups[0];
+    popup.textContent = card;
+    popup.classList.add('shown');
+    setTimeout(() => {
+        popup.classList.remove('shown');
+    }, 750);
 }
 
 function AITurn() {
@@ -94,7 +115,7 @@ function makeAIMove(callback, chance = getAIDificulty()) {
     // if (Math.random() < chance) {
 
     // }
-    if (Math.random() < getAIDificulty()) {
+    if (Math.random() < chance) {
         cellIndex = Math.floor(Math.random() * gameboardCells.length);
         while (!gameboardCells[cellIndex].classList.contains('empty')) {
             cellIndex = Math.floor(Math.random() * gameboardCells.length);
@@ -106,7 +127,7 @@ function makeAIMove(callback, chance = getAIDificulty()) {
         }
     }
     setTimeout(() => {
-        fillCell(cellIndex, aiCard);
+        fillCell(cellIndex, aiCard, 'ai');
         if (callback) callback(cellIndex);
     }, timeoutDuration);
 }
@@ -124,6 +145,7 @@ function calculatePoints(cell, side = 'player') {
         playSound(sfx.placeCell);
     }
     if (pointsEarned > 0) {
+        scorePopup(pointsEarned, side);
         setTimeout(() => {
             playSound(sfx.mediumAction);
         }, 300);
@@ -151,6 +173,14 @@ function addBonusPoints(callback) {
                 }, 100 * index);
             });
         }, 100 * playerCells.length);
+        setTimeout(() => {
+            scorePopup(playerBonus, 'player');
+        }, 100 * playerCells.length);
+        setTimeout(() => {
+            scorePopup(aiBonus, 'ai');
+        }, 100 * (playerCells.length + aiCells.length));
+    } else {
+        terminal.textContent = "No bonus points awarded due to active modifier.";
     }
     setTimeout(() => {
         score.player += playerBonus;
@@ -184,26 +214,102 @@ function findPoints(cell, points, side = playerTurnActive ? 'player' : 'ai') {
     let cellRow = Math.floor(cell / gameboardWidth);
     let cellValue = parseInt(gameboardCells[cell].dataset.value);
     let adjacentCells = gameboardConnections[`${cellRow},${cellColumn}`] || [];
+    let cellsToClaim = new Set();
     
     adjacentCells.forEach(connectedCellKey => {
         const [r, c] = connectedCellKey.split(',').map(Number);
         const connectedCellIndex = r * gameboardWidth + c;
+        // Skip empty cells to avoid NaN values
+        if (!gameboardCells[connectedCellIndex] || gameboardCells[connectedCellIndex].classList.contains('empty')) return;
         const connectedCellValue = parseInt(gameboardCells[connectedCellIndex].dataset.value);
 
         if (connectedCellValue === cellValue) {
             points++;
-            changeCell(connectedCellIndex, side === 'player' ? 'red' : 'green');
-            changeCell(cell, side === 'player' ? 'red' : 'green');
+            cellsToClaim.add(connectedCellIndex);
+            cellsToClaim.add(cell);
         }
 
         if (connectedCellValue + cellValue == 10) {
             points += 2;
-            changeCell(connectedCellIndex, side === 'player' ? 'red' : 'green');
-            changeCell(cell, side === 'player' ? 'red' : 'green');
+            cellsToClaim.add(connectedCellIndex);
+            cellsToClaim.add(cell);
         }
     });
+
+    function getCellIndex(key) {
+        const [r, c] = key.split(',').map(Number);
+        return r * gameboardWidth + c;
+    }
+
+    function getCellKey(index) {
+        const r = Math.floor(index / gameboardWidth);
+        const c = index % gameboardWidth;
+        return `${r},${c}`;
+    }
+
+    function getOccupiedNeighbors(cellIndex) {
+        const key = getCellKey(cellIndex);
+        const neighbors = gameboardConnections[key] || [];
+        const result = [];
+        neighbors.forEach(nKey => {
+            const nIndex = getCellIndex(nKey);
+            if (gameboardCells[nIndex] && !gameboardCells[nIndex].classList.contains('empty')) {
+                result.push(nIndex);
+            }
+        });
+        return result;
+    }
+
+    function walkChain(currentIndex, currentValue, direction, visited) {
+        const expectedNext = (currentValue + direction + 10) % 10;
+        const neighbors = getOccupiedNeighbors(currentIndex);
+
+        let bestChain = [];
+
+        for (const nIndex of neighbors) {
+            if (visited.has(nIndex)) continue;
+
+            const nValue = parseInt(gameboardCells[nIndex].dataset.value);
+
+            if (nValue !== expectedNext) continue;
+
+            visited.add(nIndex);
+
+            const subChain = walkChain(nIndex, nValue, direction, visited);
+
+            const candidate = [nIndex, ...subChain];
+
+            if (candidate.length > bestChain.length) {
+                bestChain = candidate;
+            }
+
+            visited.delete(nIndex);
+        }
+
+        return bestChain;
+    }
+
+    let visitedUp = new Set([cell]);
+    let upChain = walkChain(cell, cellValue, +1, visitedUp);
+
+    let visitedDown = new Set([cell]);
+    let downChain = walkChain(cell, cellValue, -1, visitedDown);
+
+    let fullSequence = [...downChain.reverse(), cell, ...upChain];
+
+    if (fullSequence.length >= 3) {
+        points += fullSequence.length;
+        fullSequence.forEach(idx => cellsToClaim.add(idx));
+    }
+
+    // --- Claim all scored cells ---
+    cellsToClaim.forEach(idx => {
+        changeCell(idx, side === 'player' ? 'red' : 'green');
+    });
+
     return points;
 }
+
 function endGame(result, playerScore, aiScore, creditsEarned) {
     gameOverPanel.classList.remove('win', 'lose', 'tie');
     gameOverPanel.querySelector('.final-your-score').textContent = `Your Score: ${playerScore}`;
@@ -278,36 +384,49 @@ function removeCellClickListener() {
         }
     });
 }
-function fillCell(cell, value) {
+function fillCell(cell, value, side = 'player') {
     let cellBlock = gameboardCells[cell];
     cellBlock.classList.remove('empty');
     cellBlock.classList.add('occupied');
     cellBlock.textContent = value;
     cellBlock.dataset.value = value;
+    cellBlock.classList.add('placing');
+    setTimeout(() => {
+        cellBlock.classList.remove('placing');
+    }, 500);
+    if (side === 'player') {
+        miniCardPopup(value, 'player');
+    } else if (side === 'ai') {
+        miniCardPopup(value, 'ai');
+    }
 }
 function changeCell(cell, newClass) {
     let cellBlock = gameboardCells[cell];
     cellBlock.classList = "map-cell " + newClass;
+    cellBlock.classList.add('placing');
+    setTimeout(() => {
+        cellBlock.classList.remove('placing');
+    }, 500);
 }
 
 startGame();
 
 
 function replaceCardActivate() {
-
+    console.log("Replace Card power-up activated!");
 }
 function skipAITurnActivate() {
-
+    console.log("Skip AI Turn power-up activated!");
 }
 function viewNextCardActivate() {
-
+    console.log("View Next Card power-up activated!");
 }
 function undoMoveActivate() {
-
+    console.log("Undo Move power-up activated!");
 }
 function pickCardActivate() {
-
+    console.log("Pick Card power-up activated!");
 }
 function doubleCreditsActivate() {
-
+    console.log("Double Credits power-up activated!");
 }

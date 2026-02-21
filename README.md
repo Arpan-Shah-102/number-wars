@@ -12,6 +12,13 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Advanced Functionality V2.5 - 2/21/2026
+1. Added Sequence Scoring (Using AI 😢😢)
+2. Fixed Card being blank bug
+3. Added Placing and scoring animations
+4. Added AI animations
+5. Bug Fixes
+
 ### Minor Bug Fixes V2.35 - 2/20/2026
 1. Improved Cell Scaling
 2. Created documentation for functions
