@@ -196,10 +196,10 @@ function updatePowerupButtons() {
         btn.querySelector('.remaining').textContent = remaining[powerupName];
         if (remaining[powerupName] > 0) {
             btn.classList.remove('disabled');
-            disabled = false;
+            // disabled = false;
         } else {
             btn.classList.add('disabled');
-            disabled = true;
+            // disabled = true;
         }
         updateCreditsMultiplierDisplay();
     });

@@ -403,30 +403,25 @@ function fillCell(cell, value, side = 'player') {
 function changeCell(cell, newClass) {
     let cellBlock = gameboardCells[cell];
     cellBlock.classList = "map-cell " + newClass;
-    cellBlock.classList.add('placing');
+    cellBlock.classList.add('matched');
     setTimeout(() => {
-        cellBlock.classList.remove('placing');
+        cellBlock.classList.remove('matched');
     }, 500);
 }
 
 startGame();
 
 
+let powerUpButtons = document.querySelectorAll('.powerup.activate-menu');
 function replaceCardActivate() {
-    console.log("Replace Card power-up activated!");
 }
 function skipAITurnActivate() {
-    console.log("Skip AI Turn power-up activated!");
 }
 function viewNextCardActivate() {
-    console.log("View Next Card power-up activated!");
 }
 function undoMoveActivate() {
-    console.log("Undo Move power-up activated!");
 }
 function pickCardActivate() {
-    console.log("Pick Card power-up activated!");
 }
 function doubleCreditsActivate() {
-    console.log("Double Credits power-up activated!");
 }

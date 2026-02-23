@@ -1014,6 +1014,9 @@ main {
             &.placing {
                 animation: placed 0.5s linear;
             }
+            &.matched {
+                animation: matched 0.5s linear;
+            }
         }
     }
 }
@@ -1115,6 +1118,22 @@ main {
     }
     100% {
         transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes matched {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    33% {
+        transform: scale(0.75) rotate(90deg);
+        opacity: 0.75;
+    }
+    66% {
+        transform: scale(1.25) rotate(-90deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
         opacity: 1;
     }
 }
