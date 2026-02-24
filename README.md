@@ -12,6 +12,9 @@ Use the items you got in the **store** in the **settings** and change up your ga
 ## Update Log
 ### Daily Updates as Always!
 
+### Minor Bug Fix V2.53 - 2/23/2026
+1. Fixed minor credits bug where it would only add whole numbers
+
 ### Something V2.51 - 2/22/2026
 1. Added something minor (i forgot)
 
