@@ -192,17 +192,15 @@ function removePowerup(powerup) {
 }
 function canAcivatePowerup(powerup) {
     let powerups = getPowerups();
-    return powerups[powerup] && powerups[powerup] > 0;
+    return powerups[powerup] > 0;
 }
 function powerUpsActivateable() {
-    return [
-        true,
-        true,
-        true,
-        true,
-        canAcivatePowerup("pick-card"),
-        canAcivatePowerup("double-credits")
-    ]
+    return JSON.parse(localStorage.getItem('powerUpsActivateable')) || [true, true, true, true, false, false];
+}
+function setPowerUpActivateable(index, value) {
+    let activateable = powerUpsActivateable();
+    activateable[index] = value;
+    localStorage.setItem('powerUpsActivateable', JSON.stringify(activateable));
 }
 
 function getStats() {
